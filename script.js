@@ -219,4 +219,14 @@
     style.textContent = '.is-visible { opacity: 1 !important; transform: translateY(0) !important; }';
     document.head.appendChild(style);
   }
+
+  // When tab is not focused, show minimal title in tab (hides full title in tab bar)
+  var fullTitle = document.title;
+  var minimalTitle = '\u2022'; // bullet, or use 'SV' if you prefer
+  function onVisibilityChange() {
+    document.title = document.hidden ? minimalTitle : fullTitle;
+  }
+  if (typeof document.hidden !== 'undefined') {
+    document.addEventListener('visibilitychange', onVisibilityChange);
+  }
 })();
