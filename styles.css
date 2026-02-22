@@ -523,9 +523,79 @@ section {
   font-weight: 500;
 }
 
+/* Experience */
+.experience {
+  background: var(--bg-raised);
+}
+
+.experience-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.experience-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  padding: 1.5rem 1.75rem;
+  transition: box-shadow var(--duration) var(--ease-out);
+}
+
+.experience-card:hover {
+  box-shadow: var(--shadow);
+}
+
+.experience-card--secondary {
+  background: var(--bg-base);
+  border-color: var(--border);
+}
+
+.experience-header {
+  margin-bottom: 1rem;
+}
+
+.experience-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem;
+  color: var(--text-primary);
+}
+
+.experience-company {
+  display: block;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--accent);
+  margin-bottom: 0.25rem;
+}
+
+.experience-date {
+  display: block;
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+.experience-duties {
+  margin: 0;
+  padding-left: 1.25rem;
+  color: var(--text-secondary);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.experience-duties li {
+  margin-bottom: 0.35rem;
+}
+
+.experience-duties li:last-child {
+  margin-bottom: 0;
+}
+
 /* Skills */
 .skills {
-  background: var(--bg-raised);
+  background: var(--bg-base);
 }
 
 .skills-grid {

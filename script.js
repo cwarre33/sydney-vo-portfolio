@@ -201,7 +201,7 @@
 
   // Scroll-triggered fade-in
   if (typeof IntersectionObserver !== 'undefined') {
-    var sections = document.querySelectorAll('.about, .project-card, .skills-grid, .contact-links');
+    var sections = document.querySelectorAll('.about, .project-card, .experience-card, .skills-grid, .contact-links');
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) entry.target.classList.add('is-visible');
