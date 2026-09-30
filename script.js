@@ -1,232 +1,224 @@
 (function () {
   'use strict';
 
-  // Year in footer
+  var data = window.PORTFOLIO || { projects: [], upcoming: [], phases: [] };
+
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function pad(n) { return n < 10 ? '0' + n : '' + n; }
+
+  // Footer year
   var yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  // Mobile nav toggle
+  // Header shadow on scroll
+  var header = document.querySelector('.site-header');
+  function onScroll() { if (header) header.classList.toggle('is-scrolled', window.scrollY > 8); }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Mobile nav
   var toggle = document.querySelector('.nav-toggle');
   var nav = document.querySelector('.nav');
+  function setNav(open) {
+    toggle.setAttribute('aria-expanded', open);
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    nav.classList.toggle('is-open', open);
+    document.body.classList.toggle('nav-open', open);
+  }
   if (toggle && nav) {
     toggle.addEventListener('click', function () {
-      var expanded = toggle.getAttribute('aria-expanded') === 'true';
-      toggle.setAttribute('aria-expanded', !expanded);
-      nav.classList.toggle('is-open');
-      document.body.style.overflow = expanded ? '' : 'hidden';
+      setNav(toggle.getAttribute('aria-expanded') !== 'true');
     });
-
-    nav.querySelectorAll('a[href^="#"]').forEach(function (a) {
-      a.addEventListener('click', function () {
-        toggle.setAttribute('aria-expanded', 'false');
-        nav.classList.remove('is-open');
-        document.body.style.overflow = '';
-      });
+    nav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { setNav(false); });
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && nav.classList.contains('is-open')) setNav(false);
     });
   }
 
-  // Project data: full descriptions and PDF slide page numbers (from portfolio PDF)
-  var projectData = {
-    commercial: {
-      meta: 'ID 144 — Interior Design I · Hand Drafting',
-      title: 'Commercial space',
-      slides: [6],
-      description: '<p>This commercial redesign transformed an existing space into a welcoming and functional environment tailored to a unique client profile. The concept emphasized cohesive aesthetics, spatial flow, and ADA-compliant accessibility to create an inclusive and engaging user experience.</p><p><strong>Deliverables:</strong> Programming, Elevation + Section, Furniture Plan, Space Plan.</p>'
-    },
-    duplex: {
-      meta: 'ID 244 — Interior Design II · SketchUp, Excel, Wecora, Canva',
-      title: 'Duplex home',
-      slides: [7, 8],
-      description: '<p>This speculative duplex explores how Universal Design, ADA principles, and Aging-in-Place strategies can shape a single-story multi-family home. The design prioritizes accessibility, long-term livability, and inclusive comfort, demonstrating how residential spaces can adapt to diverse needs over time.</p><p><strong>Phases:</strong> Schematic Design, Design Development.</p><p>Project: Duplex Home Presentation.</p>'
-    },
-    sears: {
-      meta: 'ID 244 — Interior Design II · SketchUp, Wecora, Canva, 3D model',
-      title: 'Sears modern home',
-      slides: [9, 10],
-      description: '<p>This project focused on revitalizing the Sears Modern Home Solace Model No. 3218, balancing historical preservation with modern functionality. Through in-depth research and the use of Wecora, SketchUp, and Canva, the design maintains the integrity of the original architecture while introducing thoughtful updates for contemporary living. The concept was further developed through a physical foam-board model to visualize spatial form and material intent.</p><p><strong>Phases:</strong> Programming, Schematic Design, Design Development.</p><p>Project: Solace Project Presentation.</p>'
-    },
-    hotel: {
-      meta: 'ID 248 — Technology Applications I · AutoCAD, SketchUp, Material Bank',
-      title: 'Hotel suite',
-      slides: [11, 12],
-      description: '<p>This project involved designing a hotel suite based on personal design preferences, with the floor plan and elevations developed in AutoCAD and rendered in SketchUp. Additionally, a curated composition showcased the elevations, floor plans, renderings, and design selections, effectively communicating the suite’s aesthetic and functional vision.</p><p><strong>Deliverables:</strong> Plan View — Floorplan, Elevation A, Rendered Floorplan, Rendered Elevations.</p><p>Project: Hotel Suite Presentation.</p>'
-    },
-    zanzibar: {
-      meta: 'Furnitureland South Internship · AutoCAD, SketchUp, Material Bank, Canva',
-      title: 'Zanzibar',
-      slides: [13, 14],
-      description: '<p>I developed a retail space design for Furnitureland South featuring Lexington’s Zanzibar collection, guiding the concept from programming through final design. The furniture plan was created in AutoCAD, with visualizations rendered in SketchUp. Additionally, a professional proposal detailed paint plans, accessory selections, and budget considerations to support approval of the simulated design.</p><p><strong>Phases:</strong> Programming, Schematic Design, Design Development.</p><p>Project: Zanzibar Proposal.</p>'
-    },
-    cadlab: {
-      meta: 'ID 342 — Special Problems in CADD · Revit, Enscape, Canva',
-      title: 'Meredith CAD lab',
-      slides: [15, 16],
-      description: '<p>This collaborative project involved redesigning Meredith College’s CAD Lab to enhance functionality, comfort, and collaboration. The design features grouped desks, mounted screens, and CPU stands to optimize workspace, with Revit and Enscape used to visualize a flexible, user-centered environment informed by ergonomics, materials, and spatial efficiency.</p><p><strong>Elements:</strong> Accent wall, paint, floor tile, raspberry furniture color, swivel chair, student desk, mounted screen, CPU tower. Design Development and Enscape visualizations.</p><p>Project: Meredith College CAD Lab.</p>'
+  // ---------- Home: work grid ----------
+  var workGrid = document.getElementById('work-grid');
+  if (workGrid) {
+    workGrid.innerHTML = data.projects.map(function (p, i) {
+      return '<a class="work-card' + (i === 0 ? ' is-feature' : '') + '" href="project.html?p=' + esc(p.slug) + '">' +
+        '<div class="work-media' + (p.coverContain ? ' is-drawing' : '') + '">' +
+          '<img src="' + esc(p.cover) + '" alt="' + esc(p.coverAlt) + '" loading="' + (i < 2 ? 'eager' : 'lazy') + '" />' +
+        '</div>' +
+        '<div class="work-info">' +
+          '<span class="work-num">' + pad(i + 1) + '</span>' +
+          '<div>' +
+            '<h3>' + esc(p.title) + (p.subtitle ? ' <span lang="ja">' + esc(p.subtitle) + '</span>' : '') + '</h3>' +
+            '<p class="work-summary">' + esc(p.summary) + '</p>' +
+            '<p class="work-meta">' + esc(p.course) + ' · ' + esc(p.year) + '</p>' +
+          '</div>' +
+          '<span class="work-arrow" aria-hidden="true">→</span>' +
+        '</div>' +
+      '</a>';
+    }).join('');
+  }
+
+  // ---------- Home: in-progress ----------
+  var studioGrid = document.getElementById('studio-grid');
+  if (studioGrid) {
+    studioGrid.innerHTML = data.upcoming.map(function (u) {
+      var steps = data.phases.map(function (ph, i) {
+        var state = i < u.phase ? 'is-done' : i === u.phase ? 'is-current' : '';
+        return '<li class="' + state + '"' + (i === u.phase ? ' aria-current="step"' : '') + '><span>' + esc(ph) + '</span></li>';
+      }).join('');
+      return '<article class="studio-card">' +
+        '<div class="studio-top"><span class="badge"><i></i>In progress</span><span class="eta">' + esc(u.eta) + '</span></div>' +
+        '<h3>' + esc(u.title) + '</h3>' +
+        '<p class="studio-org">' + esc(u.org) + '</p>' +
+        '<p class="studio-note">' + esc(u.note) + '</p>' +
+        '<ol class="phases" aria-label="Project phase">' + steps + '</ol>' +
+      '</article>';
+    }).join('') +
+    '<article class="studio-card studio-more"><p>More work is on the way — check back soon, or <a href="#contact">reach out</a> to see it in progress.</p></article>';
+  }
+
+  // ---------- Case study page ----------
+  var caseEl = document.querySelector('[data-case]');
+  if (caseEl) renderCase();
+
+  function renderCase() {
+    var slug = new URLSearchParams(location.search).get('p');
+    var idx = -1;
+    data.projects.forEach(function (p, i) { if (p.slug === slug) idx = i; });
+    if (idx < 0) {
+      caseEl.innerHTML = '<section class="wrap case-missing"><h1>Project not found</h1><p><a class="btn" href="index.html#work">Back to all work</a></p></section>';
+      return;
     }
-  };
+    var p = data.projects[idx];
+    var prev = data.projects[(idx - 1 + data.projects.length) % data.projects.length];
+    var next = data.projects[(idx + 1) % data.projects.length];
+    document.title = p.title + ' — Sydney Vo';
 
-  // Bubble modal
-  var overlay = document.getElementById('project-bubble');
-  var bubble = overlay && overlay.querySelector('.bubble');
-  var backdrop = overlay && overlay.querySelector('.bubble-backdrop');
-  var closeBtn = overlay && overlay.querySelector('.bubble-close');
-  var metaEl = overlay && document.getElementById('bubble-meta');
-  var titleEl = overlay && document.getElementById('bubble-title');
-  var trackEl = overlay && overlay.querySelector('.bubble-slides-track');
-  var dotsEl = overlay && overlay.querySelector('.bubble-dots');
-  var descEl = overlay && overlay.querySelector('.bubble-description');
-  var prevBtn = overlay && overlay.querySelector('.bubble-slide-prev');
-  var nextBtn = overlay && overlay.querySelector('.bubble-slide-next');
+    // The cover image is shown as the hero, so drop it from the gallery and reuse its caption.
+    var coverItem = (p.gallery || []).filter(function (g) { return g.src === p.cover; })[0];
+    var gallery = (p.gallery || []).filter(function (g) { return g.src !== p.cover; });
 
-  function openBubble(projectId) {
-    var data = projectData[projectId];
-    if (!data || !overlay) return;
+    var facts = [['Course', p.course], ['Year', p.year], ['Software', p.software.join(', ')]].concat(p.facts || []);
 
-    metaEl.textContent = data.meta;
-    titleEl.textContent = data.title;
-    descEl.innerHTML = data.description;
+    var html = '' +
+      '<section class="case-head wrap">' +
+        '<a class="back" href="index.html#work">← All work</a>' +
+        '<div class="rule-label"><span>Project ' + pad(idx + 1) + '</span><i></i><b>' + esc(p.kind) + '</b></div>' +
+        '<h1>' + esc(p.title) + (p.subtitle ? ' <span lang="ja">' + esc(p.subtitle) + '</span>' : '') + '</h1>' +
+        '<dl class="facts">' + facts.map(function (f) { return '<div><dt>' + esc(f[0]) + '</dt><dd>' + esc(f[1]) + '</dd></div>'; }).join('') + '</dl>' +
+      '</section>' +
+      '<figure class="case-hero wrap' + (p.coverContain ? ' is-drawing' : '') + '"><img src="' + esc(p.cover) + '" alt="' + esc(p.coverAlt) + '" data-zoom />' +
+        (coverItem ? '<figcaption>' + esc(coverItem.caption) + '</figcaption>' : '') + '</figure>' +
+      '<section class="case-intro wrap">' +
+        '<h2 class="eyebrow">Project description</h2>' +
+        '<div class="case-text">' + p.description.map(function (t) { return '<p>' + esc(t) + '</p>'; }).join('') +
+          (p.link ? '<p><a class="link" href="' + esc(p.link.href) + '" target="_blank" rel="noopener noreferrer">' + esc(p.link.label) + ' ↗</a></p>' : '') +
+        '</div>' +
+      '</section>';
 
-    // Build slides
-    trackEl.innerHTML = '';
-    data.slides.forEach(function (pageNum) {
-      var pad = pageNum < 10 ? '0' + pageNum : '' + pageNum;
-      var img = document.createElement('img');
-      img.src = 'images/page-' + pad + '.png';
-      img.alt = data.title + ' — slide ' + pageNum;
-      trackEl.appendChild(img);
-    });
-
-    // Dots
-    dotsEl.innerHTML = '';
-    if (data.slides.length > 1) {
-      data.slides.forEach(function (_, i) {
-        var btn = document.createElement('button');
-        btn.type = 'button';
-        btn.setAttribute('aria-label', 'Go to slide ' + (i + 1));
-        if (i === 0) btn.classList.add('is-active');
-        btn.addEventListener('click', function () {
-          goToSlide(trackEl, i);
-          setActiveDot(dotsEl, i);
-        });
-        dotsEl.appendChild(btn);
-      });
-      if (prevBtn && nextBtn) {
-        prevBtn.style.display = 'flex';
-        nextBtn.style.display = 'flex';
-        prevBtn.onclick = function () {
-          var idx = getCurrentSlideIndex(trackEl);
-          var next = Math.max(0, idx - 1);
-          goToSlide(trackEl, next);
-          setActiveDot(dotsEl, next);
-        };
-        nextBtn.onclick = function () {
-          var idx = getCurrentSlideIndex(trackEl);
-          var next = Math.min(data.slides.length - 1, idx + 1);
-          goToSlide(trackEl, next);
-          setActiveDot(dotsEl, next);
-        };
-      }
-    } else {
-      if (prevBtn && nextBtn) {
-        prevBtn.style.display = 'none';
-        nextBtn.style.display = 'none';
-      }
+    if (p.concept) {
+      html += '<section class="case-concept wrap"><h2 class="eyebrow">Concept</h2><blockquote>' + esc(p.concept) + '</blockquote></section>';
     }
 
-    overlay.classList.add('is-open');
-    overlay.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-    closeBtn && closeBtn.focus();
+    if (p.drivers && p.drivers.length) {
+      html += '<section class="case-drivers wrap"><h2 class="eyebrow">Research drivers</h2><ul>' +
+        p.drivers.map(function (d, i) { return '<li><span>' + pad(i + 1) + '</span><strong>' + esc(d[0]) + '</strong><p>' + esc(d[1]) + '</p></li>'; }).join('') +
+        '</ul></section>';
+    }
+
+    html += '<section class="case-process wrap"><h2 class="eyebrow">Process</h2><ol>' +
+      p.process.map(function (s) { return '<li><h3>' + esc(s[0]) + '</h3><p>' + esc(s[1]) + '</p></li>'; }).join('') +
+      '</ol></section>';
+
+    if (gallery.length) {
+      html += '<section class="case-gallery wrap"><h2 class="eyebrow">Visuals</h2><div class="gallery">' +
+        gallery.map(function (g) {
+          var cls = [g.wide ? 'is-wide' : '', g.tall ? 'is-tall' : '', g.contain ? 'is-drawing' : ''].join(' ').trim();
+          return '<figure class="' + cls + '"><img src="' + esc(g.src) + '" alt="' + esc(g.caption) + '" loading="lazy" data-zoom /><figcaption>' + esc(g.caption) + '</figcaption></figure>';
+        }).join('') + '</div></section>';
+    }
+
+    if (p.boards && p.boards.length) {
+      html += '<section class="case-boards wrap"><h2 class="eyebrow">Presentation boards</h2><p class="boards-note">The full layouts from my printed portfolio. Tap any board to enlarge.</p><div class="boards">' +
+        p.boards.map(function (n, i) {
+          return '<figure><img src="assets/boards/board-' + pad(n) + '.webp" alt="' + esc(p.title) + ' — presentation board ' + (i + 1) + ' of ' + p.boards.length + '" loading="lazy" data-zoom /><figcaption>Board ' + (i + 1) + ' / ' + p.boards.length + '</figcaption></figure>';
+        }).join('') + '</div></section>';
+    }
+
+    html += '<nav class="case-nav wrap" aria-label="More projects">' +
+      '<a href="project.html?p=' + esc(prev.slug) + '"><small>← Previous</small>' + esc(prev.title) + '</a>' +
+      '<a href="project.html?p=' + esc(next.slug) + '"><small>Next →</small>' + esc(next.title) + '</a>' +
+    '</nav>';
+
+    caseEl.innerHTML = html;
+    initLightbox();
   }
 
-  function closeBubble() {
-    if (!overlay) return;
-    overlay.classList.remove('is-open');
-    overlay.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-  }
+  // ---------- Lightbox ----------
+  function initLightbox() {
+    var lb = document.getElementById('lightbox');
+    if (!lb) return;
+    var imgs = Array.prototype.slice.call(document.querySelectorAll('[data-zoom]'));
+    var lbImg = lb.querySelector('img');
+    var lbCap = lb.querySelector('figcaption');
+    var current = 0;
+    var lastFocus = null;
 
-  function goToSlide(track, index) {
-    if (!track || !track.children[index]) return;
-    track.children[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
-  }
+    function show(i) {
+      current = (i + imgs.length) % imgs.length;
+      var src = imgs[current];
+      lbImg.src = src.src;
+      lbImg.alt = src.alt;
+      var cap = src.closest('figure') && src.closest('figure').querySelector('figcaption');
+      lbCap.textContent = cap ? cap.textContent : '';
+    }
+    function open(i) {
+      lastFocus = document.activeElement;
+      show(i);
+      lb.hidden = false;
+      document.body.classList.add('nav-open');
+      lb.querySelector('.lb-close').focus();
+    }
+    function close() {
+      lb.hidden = true;
+      document.body.classList.remove('nav-open');
+      if (lastFocus) lastFocus.focus();
+    }
 
-  function getCurrentSlideIndex(track) {
-    if (!track || !track.firstElementChild) return 0;
-    var scrollLeft = track.scrollLeft;
-    var width = track.firstElementChild.offsetWidth;
-    return Math.round(scrollLeft / width);
-  }
-
-  function setActiveDot(dots, index) {
-    if (!dots) return;
-    var buttons = dots.querySelectorAll('button');
-    buttons.forEach(function (b, i) {
-      b.classList.toggle('is-active', i === index);
-    });
-  }
-
-  if (backdrop) backdrop.addEventListener('click', closeBubble);
-  if (closeBtn) closeBtn.addEventListener('click', closeBubble);
-
-  overlay && overlay.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') closeBubble();
-  });
-
-  // Project cards: open bubble on click/Enter/Space
-  document.querySelectorAll('.project-card[data-project-id]').forEach(function (card) {
-    var id = card.getAttribute('data-project-id');
-    if (!id) return;
-
-    card.addEventListener('click', function (e) {
-      e.preventDefault();
-      openBubble(id);
-    });
-
-    card.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        openBubble(id);
-      }
-    });
-  });
-
-  // Sync dots when user scrolls slides
-  if (trackEl && dotsEl) {
-    trackEl.addEventListener('scroll', function () {
-      var idx = getCurrentSlideIndex(trackEl);
-      setActiveDot(dotsEl, idx);
-    });
-  }
-
-  // Scroll-triggered fade-in
-  if (typeof IntersectionObserver !== 'undefined') {
-    var sections = document.querySelectorAll('.about, .project-card, .experience-card, .skills-grid, .contact-links');
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) entry.target.classList.add('is-visible');
+    imgs.forEach(function (img, i) {
+      img.tabIndex = 0;
+      img.setAttribute('role', 'button');
+      img.addEventListener('click', function () { open(i); });
+      img.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(i); }
       });
-    }, { rootMargin: '0px 0px -40px 0px', threshold: 0 });
-
-    sections.forEach(function (el) {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(12px)';
-      el.style.transition = 'opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1), transform 0.5s cubic-bezier(0.22, 1, 0.36, 1)';
-      observer.observe(el);
     });
-
-    var style = document.createElement('style');
-    style.textContent = '.is-visible { opacity: 1 !important; transform: translateY(0) !important; }';
-    document.head.appendChild(style);
+    lb.querySelector('.lb-close').addEventListener('click', close);
+    lb.querySelector('.lb-prev').addEventListener('click', function () { show(current - 1); });
+    lb.querySelector('.lb-next').addEventListener('click', function () { show(current + 1); });
+    lb.addEventListener('click', function (e) { if (e.target === lb) close(); });
+    document.addEventListener('keydown', function (e) {
+      if (lb.hidden) return;
+      if (e.key === 'Escape') close();
+      else if (e.key === 'ArrowLeft') show(current - 1);
+      else if (e.key === 'ArrowRight') show(current + 1);
+    });
   }
 
-  // When tab is not focused, show minimal title in tab (hides full title in tab bar)
-  var fullTitle = document.title;
-  var minimalTitle = '\u2022'; // bullet, or use 'SV' if you prefer
-  function onVisibilityChange() {
-    document.title = document.hidden ? minimalTitle : fullTitle;
-  }
-  if (typeof document.hidden !== 'undefined') {
-    document.addEventListener('visibilitychange', onVisibilityChange);
+  // Reveal on scroll
+  if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    document.querySelectorAll('.work-card, .studio-card, .section-head, .case-gallery figure, .case-boards figure').forEach(function (el) {
+      el.classList.add('reveal');
+      io.observe(el);
+    });
   }
 })();
