@@ -83,11 +83,10 @@ strong { font-weight: 500; }
 /* ---------- Header ---------- */
 .site-header {
   position: sticky; top: 0; z-index: 100; height: var(--header-h);
-  background: color-mix(in srgb, var(--paper) 88%, transparent);
-  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
-  border-bottom: 1px solid transparent; transition: border-color .3s;
+  background: var(--paper); /* solid so the header never shows content through it */
+  border-bottom: 1px solid transparent; transition: border-color .3s, box-shadow .3s;
 }
-.site-header.is-scrolled { border-bottom-color: var(--rule); }
+.site-header.is-scrolled { border-bottom-color: var(--rule); box-shadow: 0 6px 18px rgba(21,20,19,.06); }
 .header-inner { max-width: var(--max); margin: 0 auto; height: 100%; padding: 0 var(--gutter); display: flex; align-items: center; justify-content: space-between; }
 .logo { display: inline-flex; align-items: center; gap: 6px; text-decoration: none; font-family: var(--f-serif); font-size: 26px; line-height: 1; }
 .logo i { width: 1px; height: 30px; background: var(--ink); }
