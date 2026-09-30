@@ -92,9 +92,9 @@ window.PORTFOLIO = {
       title: 'Commercial Mural',
       kind: 'Exterior environmental graphic',
       course: 'MM Interior Design Group · Internship',
-      year: 'Summer 2025',
+      year: 'Summer 2026',
       software: ['Hand sketching', 'SketchUp'],
-      facts: [['Scale', '80,000 sq ft warehouse'], ['Status', 'Built']],
+      facts: [['Scale', '80,000 sq ft warehouse'], ['Designed', 'Summer 2025 internship'], ['Installed', 'Summer 2026']],
       cover: 'assets/img/mural-install.webp',
       coverAlt: 'A large navy letter-form mural installed on a white warehouse façade',
       summary: 'Mural concepts for an 80,000 sq ft warehouse — sketched, modeled, and installed.',
@@ -105,7 +105,7 @@ window.PORTFOLIO = {
       process: [
         ['Schematic Design', 'Conceptual hand sketches explored composition, scale, and brand-aligned graphic forms to test visual rhythm across the façade.'],
         ['Design Development', 'Schematic concepts moved into SketchUp to check true scale, proportion, and impact on the building envelope.'],
-        ['Implementation', 'The final mural was installed on the building — the concept brought to life at full architectural scale.']
+        ['Implementation', 'The final mural was installed on the building in Summer 2026 — the concept brought to life at full architectural scale.']
       ],
       gallery: [
         { src: 'assets/img/mural-install.webp', caption: 'Final installation on the warehouse façade.', tall: true }
@@ -204,13 +204,6 @@ window.PORTFOLIO = {
       eta: 'Spring 2027',
       phase: 0,
       note: 'Currently in programming. Research, site analysis, and first block diagrams are underway.'
-    },
-    {
-      title: 'Lauren Ashley Design',
-      org: 'Interior Design Internship · Aug–Dec 2025',
-      eta: 'Coming soon',
-      phase: 2,
-      note: 'AutoCAD plans, SketchUp models, mood boards, and finish options from residential projects — case study in the works.'
     }
   ]
 };

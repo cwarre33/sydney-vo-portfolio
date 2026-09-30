@@ -165,7 +165,7 @@ strong { font-weight: 500; }
 .studio .rule-label { color: #CFC8BD; }
 .studio .rule-label i { background: #4A4641; }
 .studio .section-head p { color: #B3ACA2; }
-.studio-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.studio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 20px; }
 .studio-card { border: 1px dashed #5A554F; padding: 28px; display: flex; flex-direction: column; min-height: 340px; background: rgba(255,255,255,.02); transition: border-color .3s, background .3s; }
 .studio-card:hover { border-color: #A89F93; background: rgba(255,255,255,.04); }
 .studio-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; }
@@ -294,7 +294,6 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
 
 /* ---------- Responsive ---------- */
 @media (max-width: 1000px) {
-  .studio-grid { grid-template-columns: 1fr 1fr; }
   .resume-grid { grid-template-columns: 1fr 1fr; }
   .resume-col:first-child { grid-column: 1 / -1; }
 }
@@ -321,7 +320,7 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
 }
 @media (max-width: 640px) {
   body { font-size: 16px; }
-  .studio-grid, .resume-grid { grid-template-columns: 1fr; }
+  .resume-grid { grid-template-columns: 1fr; }
   .studio-card { min-height: 0; }
   .contact-links { grid-template-columns: 1fr; }
   .contact-links a:nth-child(2) { padding-left: 0; border-left: 0; }
