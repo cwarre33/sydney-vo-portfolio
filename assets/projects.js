@@ -41,9 +41,9 @@ window.PORTFOLIO = {
         ['Biophilic integration', 'Natural woods and greenery strengthen well-being and connection to nature.']
       ],
       process: [
-        ['Programming', 'Explored multiple block-diagram iterations to refine functional zoning, room adjacencies, and circulation.'],
-        ['Schematic Design', 'The footprint splits active and quiet zones: reception, retail, and tea bar face Hillsborough Street, while studios and amenities transition toward the quiet rear alley. Sections keep the original 14′-0″ floor-to-deck clearance, with dropped ceilings in select zones for human scale and acoustic comfort.'],
-        ['Design Development', 'Custom millwork for the reception desk and tea bar counter uses dual counter heights, durable surfaces, and integrated storage to meet ADA standards without sacrificing style. A lighting plan sets the overall intent and ambiance.']
+        ['Programming', 'Explored multiple block-diagram iterations to refine functional zoning, room adjacencies, and circulation.', [['assets/process/kenko-program.webp', 'Site location, original floor plan, and block-diagram iterations']]],
+        ['Schematic Design', 'The footprint splits active and quiet zones: reception, retail, and tea bar face Hillsborough Street, while studios and amenities transition toward the quiet rear alley. Sections keep the original 14′-0″ floor-to-deck clearance, with dropped ceilings in select zones for human scale and acoustic comfort.', [['assets/process/kenko-plans.webp', 'New floor plan and rendered floor plan'], ['assets/process/kenko-sections.webp', 'Front and back sections']]],
+        ['Design Development', 'Custom millwork for the reception desk and tea bar counter uses dual counter heights, durable surfaces, and integrated storage to meet ADA standards without sacrificing style. A lighting plan sets the overall intent and ambiance.', [['assets/process/kenko-millwork-desk.webp', 'Custom millwork — reception desk'], ['assets/process/kenko-millwork-teabar.webp', 'Custom millwork — tea bar counter'], ['assets/process/kenko-lighting.webp', 'Lighting plan']]]
       ],
       gallery: [
         { src: 'assets/img/kenko-teabar.webp', caption: 'Tea bar — platform seating view. Warm wood, green tile accents, and soft pendant light create a place to gather and relax.', wide: true },
@@ -75,9 +75,9 @@ window.PORTFOLIO = {
         ['Acoustics & ESD safety', 'Static-control SDT tile flooring and acoustic ceiling panels protect hardware and balance room sound.']
       ],
       process: [
-        ['Programming', 'Documented the existing floor plan and how students actually used the room.'],
-        ['Schematic Design', 'A proposed floor plan with east and west elevations organizing desks into collaborative pods.'],
-        ['Design Development', 'A palette of accent wall paint, floor tile, and a raspberry furniture color, with professor, student, and overflow desks, swivel chairs, CPU towers, and mounted screens.']
+        ['Programming', 'Documented the existing floor plan and how students actually used the room.', [['assets/process/cad-existing.webp', 'Existing floor plan']]],
+        ['Schematic Design', 'A proposed floor plan with east and west elevations organizing desks into collaborative pods.', [['assets/process/cad-schematic.webp', 'Proposed floor plan with east and west elevations']]],
+        ['Design Development', 'A palette of accent wall paint, floor tile, and a raspberry furniture color, with professor, student, and overflow desks, swivel chairs, CPU towers, and mounted screens.', [['assets/process/cad-dd.webp', 'Color palette and furniture selections']]]
       ],
       gallery: [
         { src: 'assets/img/cadlab-presentation.webp', caption: 'Instructor & presentation zone — a focal wall with integrated AV projection, brand-aligned accent finishes, and clear sightlines from every workstation.', wide: true },
@@ -103,9 +103,9 @@ window.PORTFOLIO = {
         'An on-site spatial analysis evaluated scale, viewing angles, and architectural context, translating brand values into large-scale environmental graphics through hand sketching and 3D visualization.'
       ],
       process: [
-        ['Schematic Design', 'Conceptual hand sketches explored composition, scale, and brand-aligned graphic forms to test visual rhythm across the façade.'],
-        ['Design Development', 'Schematic concepts moved into SketchUp to check true scale, proportion, and impact on the building envelope.'],
-        ['Implementation', 'The final mural was installed on the building in Summer 2026 — the concept brought to life at full architectural scale.']
+        ['Schematic Design', 'Conceptual hand sketches explored composition, scale, and brand-aligned graphic forms to test visual rhythm across the façade.', [['assets/process/mural-sketches.webp', 'Conceptual hand sketches']]],
+        ['Design Development', 'Schematic concepts moved into SketchUp to check true scale, proportion, and impact on the building envelope.', [['assets/process/mural-models.webp', 'SketchUp studies on the façade']]],
+        ['Implementation', 'The final mural was installed on the building in Summer 2026 — the concept brought to life at full architectural scale.', [['assets/img/mural-install.webp', 'Installed on the warehouse façade']]]
       ],
       gallery: [
         { src: 'assets/img/mural-install.webp', caption: 'Final installation on the warehouse façade.', tall: true }
@@ -128,9 +128,9 @@ window.PORTFOLIO = {
         'Drafted furniture layouts in AutoCAD, generated 3D visualizations in SketchUp, and wrote a client proposal covering paint schemes, accessory styling, and cost estimates to secure approval.'
       ],
       process: [
-        ['Programming', 'Evaluated spatial boundaries, sightlines, and display capacity for the floor directly behind the main reception desk.'],
-        ['Schematic Design', 'AutoCAD layouts established flow, furniture placement, and visual hierarchy. Sherwin-Williams Pure White (SW 7005), Snowbound (SW 7004), and Sealskin (SW 7675) complement the furniture finishes.'],
-        ['Design Development', 'SketchUp models tested alternative merchandising strategies within existing constraints, and itemized accessory boards laid out vendors, pricing, and a full budget breakdown.']
+        ['Programming', 'Evaluated spatial boundaries, sightlines, and display capacity for the floor directly behind the main reception desk.', [['assets/process/zanz-program.webp', 'Existing floor plan and fabric swatches']]],
+        ['Schematic Design', 'AutoCAD layouts established flow, furniture placement, and visual hierarchy. Sherwin-Williams Pure White (SW 7005), Snowbound (SW 7004), and Sealskin (SW 7675) complement the furniture finishes.', [['assets/process/zanz-layouts.webp', 'Schematic AutoCAD layouts'], ['assets/process/zanz-paint.webp', 'Sherwin-Williams paint selections']]],
+        ['Design Development', 'SketchUp models tested alternative merchandising strategies within existing constraints, and itemized accessory boards laid out vendors, pricing, and a full budget breakdown.', [['assets/process/zanz-accessories.webp', 'Accessory boards and cost breakdown']]]
       ],
       gallery: [
         { src: 'assets/img/zanzibar-render.webp', caption: 'Living vignette — the Zanzibar collection re-envisioned for the reception showroom.', wide: true },
@@ -155,9 +155,9 @@ window.PORTFOLIO = {
         'The concept was developed through hand sketching, physical foam-board scale models, SketchUp modeling, Wecora material boards, and Canva.'
       ],
       process: [
-        ['Programming', 'Studied the original first- and second-floor plans and mapped primary and secondary adjacencies with matrices and bubble diagrams.'],
-        ['Schematic Design', 'Reworked floor plans for both levels, plus a stair section and perspective, tested in a foam-board model.'],
-        ['Design Development', 'Detailed 3D elevations of the dining room with custom millwork, architectural moulding, period-inspired wallcoverings, and layered drapery.']
+        ['Programming', 'Studied the original first- and second-floor plans and mapped primary and secondary adjacencies with matrices and bubble diagrams.', [['assets/process/sears-house.webp', 'Solace Model No. 3218'], ['assets/process/sears-original.webp', 'Original floor plans'], ['assets/process/sears-adjacency.webp', 'Adjacency matrices and bubble diagrams']]],
+        ['Schematic Design', 'Reworked floor plans for both levels, plus a stair section and perspective, tested in a foam-board model.', [['assets/process/sears-plans.webp', 'First and second floor plans, stair section and perspective'], ['assets/process/sears-models.webp', 'Foam-board scale model']]],
+        ['Design Development', 'Detailed 3D elevations of the dining room with custom millwork, architectural moulding, period-inspired wallcoverings, and layered drapery.', [['assets/process/sears-elevations.webp', 'Dining room elevations']]]
       ],
       gallery: [
         { src: 'assets/img/sears-dining.webp', caption: 'Dining room perspective — custom wainscoting, period wallcovering, and layered drapery.', wide: true },
@@ -182,9 +182,9 @@ window.PORTFOLIO = {
         'The layout emphasizes clear spatial organization, efficient circulation, and ADA-compliant accessibility to create a functional, well-proportioned workspace.'
       ],
       process: [
-        ['Schematic Design', 'Room-by-room studies and bubble plans for reception, conference, private offices, and work areas.'],
-        ['Space & Furniture Plan', 'Hand-drafted space plan and furniture plan with a lighting legend.'],
-        ['Elevation & Section', 'Drafted elevation and section details to finish the drawing set.']
+        ['Schematic Design', 'Room-by-room studies and bubble plans for reception, conference, private offices, and work areas.', [['assets/process/office-schematic.webp', 'Room studies and schematic plan']]],
+        ['Space & Furniture Plan', 'Hand-drafted space plan and furniture plan with a lighting legend.', [['assets/process/office-space.webp', 'Space plan'], ['assets/process/office-furniture-plan.webp', 'Furniture plan']]],
+        ['Elevation & Section', 'Drafted elevation and section details to finish the drawing set.', [['assets/process/office-elevation.webp', 'Elevation and section']]]
       ],
       gallery: [
         { src: 'assets/img/office-furniture.webp', caption: 'Furniture plan', contain: true, wide: true },
