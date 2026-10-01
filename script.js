@@ -131,7 +131,14 @@
     }
 
     html += '<section class="case-process wrap"><h2 class="eyebrow">Process</h2><ol>' +
-      p.process.map(function (s) { return '<li><h3>' + esc(s[0]) + '</h3><p>' + esc(s[1]) + '</p></li>'; }).join('') +
+      p.process.map(function (s) {
+        var media = (s[2] || []).map(function (m) {
+          return '<figure><img src="' + esc(m[0]) + '" alt="' + esc(m[1]) + '" loading="lazy" data-zoom /><figcaption>' + esc(m[1]) + '</figcaption></figure>';
+        }).join('');
+        var count = (s[2] || []).length;
+        return '<li><h3>' + esc(s[0]) + '</h3><p>' + esc(s[1]) + '</p>' +
+          (media ? '<div class="step-media" data-count="' + count + '">' + media + '</div>' : '') + '</li>';
+      }).join('') +
       '</ol></section>';
 
     if (gallery.length) {
@@ -216,7 +223,7 @@
         if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); }
       });
     }, { rootMargin: '0px 0px -8% 0px' });
-    document.querySelectorAll('.work-card, .studio-card, .section-head, .case-gallery figure, .case-boards figure').forEach(function (el) {
+    document.querySelectorAll('.work-card, .studio-card, .section-head, .case-gallery figure, .case-boards figure, .step-media').forEach(function (el) {
       el.classList.add('reveal');
       io.observe(el);
     });
