@@ -2,14 +2,16 @@
 
 Static site (no build step), deployed to GitHub Pages from `main`.
 
-- `index.html`: cover, selected work, **In the studio** (upcoming work), about, résumé, contact
-- `project.html?p=<slug>`: case-study page, rendered from the project data
+- `index.html`: cover, statement, selected work + project index, **On the boards** (work in progress), about, experience, contact
+- `project.html?p=<slug>`: case-study page (facts → brief → concept → research → process → materials → visuals → boards → next project), rendered from the project data
+- `404.html`: custom not-found page (Netlify serves it automatically)
+- `docs/design-research.md`: the award-site research behind the design
 - `assets/projects.js`: **all project content lives here**
-- `assets/img/`: renders and drawings cropped from the PDF portfolio
+- `assets/img/`, `assets/process/`, `assets/materials/`, `assets/icons/`: renders, process drawings, material swatches and software icons cropped from the PDF portfolio
 - `assets/boards/`: full portfolio pages (board-NN = PDF page NN)
 - `reference_content/`: the PDF portfolio (linked as a download) and résumé
 
-## Adding or updating an upcoming project
+## Adding or updating an "On the boards" project
 
 Edit the `upcoming` list in `assets/projects.js`:
 
@@ -23,7 +25,7 @@ Edit the `upcoming` list in `assets/projects.js`:
 ## When a project is finished
 
 1. Add its images to `assets/img/` (WebP or JPG, ~2000px wide).
-2. Move its entry from `upcoming` into `projects`, filling in `slug`, `cover`, `description`, `process`, `gallery`, and so on (copy an existing project as a template).
+2. Move its entry from `upcoming` into `projects`, filling in `slug`, `cover`, `brief`, `description`, `process` (each step can list drawings), `materials` (an image or a hex colour per swatch), `gallery`, and so on (copy an existing project as a template).
 3. Optional: export the new PDF pages to `assets/boards/board-NN.webp` and list the page numbers in `boards`.
 
 ## Running locally
