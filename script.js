@@ -2,6 +2,8 @@
   'use strict';
 
   var data = window.PORTFOLIO || { projects: [], upcoming: [], phases: [] };
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
   function esc(s) {
     return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
@@ -9,20 +11,28 @@
     });
   }
   function pad(n) { return n < 10 ? '0' + n : '' + n; }
+  function $(sel, root) { return (root || document).querySelector(sel); }
+  function $$(sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
+  function vtName(slug) { return 'p-' + slug; }
 
-  // Footer year
-  var yearEl = document.getElementById('year');
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
+  $$('[data-year]').forEach(function (el) { el.textContent = new Date().getFullYear(); });
 
-  // Header shadow on scroll
-  var header = document.querySelector('.site-header');
-  function onScroll() { if (header) header.classList.toggle('is-scrolled', window.scrollY > 8); }
+  // ---------- Header: solid, hides on scroll down and returns on scroll up ----------
+  var header = $('[data-header]');
+  var lastY = window.scrollY;
+  function onScroll() {
+    if (!header) return;
+    var y = window.scrollY;
+    var navOpen = document.body.classList.contains('nav-open');
+    header.classList.toggle('is-hidden', !navOpen && y > lastY && y > 400);
+    lastY = y;
+  }
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  // Mobile nav
-  var toggle = document.querySelector('.nav-toggle');
-  var nav = document.querySelector('.nav');
+  // ---------- Mobile nav ----------
+  var toggle = $('.nav-toggle');
+  var nav = $('.nav');
   function setNav(open) {
     toggle.setAttribute('aria-expanded', open);
     toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
@@ -30,183 +40,225 @@
     document.body.classList.toggle('nav-open', open);
   }
   if (toggle && nav) {
-    toggle.addEventListener('click', function () {
-      setNav(toggle.getAttribute('aria-expanded') !== 'true');
-    });
-    nav.querySelectorAll('a').forEach(function (a) {
-      a.addEventListener('click', function () { setNav(false); });
-    });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && nav.classList.contains('is-open')) setNav(false);
-    });
+    toggle.addEventListener('click', function () { setNav(toggle.getAttribute('aria-expanded') !== 'true'); });
+    $$('a', nav).forEach(function (a) { a.addEventListener('click', function () { setNav(false); }); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && nav.classList.contains('is-open')) setNav(false); });
   }
 
-  // ---------- Home: work grid ----------
-  var workGrid = document.getElementById('work-grid');
-  if (workGrid) {
-    workGrid.innerHTML = data.projects.map(function (p, i) {
-      return '<a class="work-card' + (i === 0 ? ' is-feature' : '') + '" href="project.html?p=' + esc(p.slug) + '">' +
-        '<div class="work-media' + (p.coverContain ? ' is-drawing' : '') + '">' +
-          '<img src="' + esc(p.cover) + '" alt="' + esc(p.coverAlt) + '" loading="' + (i < 2 ? 'eager' : 'lazy') + '" />' +
+  // ---------- Home: editorial project features ----------
+  var features = $('#features');
+  if (features) {
+    var layouts = ['is-wide', 'is-left', 'is-right', 'is-left', 'is-right', 'is-left'];
+    features.innerHTML = data.projects.map(function (p, i) {
+      var layout = layouts[i % layouts.length];
+      return '<article class="feature ' + layout + (p.coverContain ? ' is-drawing' : '') + '">' +
+        '<a class="feature-media img-reveal" href="project.html?p=' + esc(p.slug) + '" data-cursor tabindex="-1" aria-hidden="true">' +
+          '<img src="' + esc(p.cover) + '" alt="" loading="' + (i === 0 ? 'eager' : 'lazy') + '" style="view-transition-name:' + vtName(p.slug) + '" />' +
+        '</a>' +
+        '<div class="feature-text reveal">' +
+          '<span class="feature-num">' + pad(i + 1) + '</span>' +
+          '<p class="feature-kind">' + esc(p.kind) + ' · ' + esc(p.year) + '</p>' +
+          '<h3><a href="project.html?p=' + esc(p.slug) + '">' + esc(p.title) + (p.subtitle ? ' <span lang="ja">' + esc(p.subtitle) + '</span>' : '') + '</a></h3>' +
+          '<p class="feature-summary">' + esc(p.summary) + '</p>' +
+          '<a class="link-arrow" href="project.html?p=' + esc(p.slug) + '" aria-label="View project: ' + esc(p.title) + '">View project <span aria-hidden="true">→</span></a>' +
         '</div>' +
-        '<div class="work-info">' +
-          '<span class="work-num">' + pad(i + 1) + '</span>' +
-          '<div>' +
-            '<h3>' + esc(p.title) + (p.subtitle ? ' <span lang="ja">' + esc(p.subtitle) + '</span>' : '') + '</h3>' +
-            '<p class="work-summary">' + esc(p.summary) + '</p>' +
-            '<p class="work-meta">' + esc(p.course) + ' · ' + esc(p.year) + '</p>' +
-          '</div>' +
-          '<span class="work-arrow" aria-hidden="true">→</span>' +
-        '</div>' +
-      '</a>';
+      '</article>';
     }).join('');
   }
 
-  // ---------- Home: in-progress ----------
-  var studioGrid = document.getElementById('studio-grid');
-  if (studioGrid) {
-    studioGrid.innerHTML = data.upcoming.map(function (u) {
+  // ---------- Home: index list with hover preview ----------
+  var indexList = $('#index-list');
+  if (indexList) {
+    indexList.innerHTML = data.projects.map(function (p, i) {
+      return '<li><a href="project.html?p=' + esc(p.slug) + '" data-preview="' + esc(p.cover) + '">' +
+        '<span class="i-num">' + pad(i + 1) + '</span>' +
+        '<span class="i-title">' + esc(p.title) + '</span>' +
+        '<span class="i-kind">' + esc(p.kind) + '</span>' +
+        '<span class="i-year">' + esc(p.year) + '</span>' +
+        '<span class="i-arrow" aria-hidden="true">→</span>' +
+      '</a></li>';
+    }).join('');
+
+    var preview = $('.index-preview');
+    var previewImg = preview && $('img', preview);
+    if (preview && finePointer) {
+      $$('a', indexList).forEach(function (a) {
+        a.addEventListener('mouseenter', function () { previewImg.src = a.getAttribute('data-preview'); preview.classList.add('is-on'); });
+        a.addEventListener('mouseleave', function () { preview.classList.remove('is-on'); });
+      });
+      indexList.addEventListener('mousemove', function (e) {
+        preview.style.transform = 'translate(' + (e.clientX + 24) + 'px,' + (e.clientY - 120) + 'px)';
+      });
+    }
+  }
+
+  // ---------- Home: on the boards ----------
+  var otb = $('#otb-grid');
+  if (otb) {
+    otb.innerHTML = data.upcoming.map(function (u) {
       var steps = data.phases.map(function (ph, i) {
         var state = i < u.phase ? 'is-done' : i === u.phase ? 'is-current' : '';
         return '<li class="' + state + '"' + (i === u.phase ? ' aria-current="step"' : '') + '><span>' + esc(ph) + '</span></li>';
       }).join('');
-      return '<article class="studio-card">' +
-        '<div class="studio-top"><span class="badge"><i></i>In progress</span><span class="eta">' + esc(u.eta) + '</span></div>' +
+      return '<article class="otb-card reveal">' +
+        '<div class="otb-top"><span class="badge"><i></i>In progress</span><span>' + esc(u.eta) + '</span></div>' +
         '<h3>' + esc(u.title) + '</h3>' +
-        '<p class="studio-org">' + esc(u.org) + '</p>' +
-        '<p class="studio-note">' + esc(u.note) + '</p>' +
+        '<p class="otb-org">' + esc(u.org) + '</p>' +
+        '<p class="otb-note">' + esc(u.note) + '</p>' +
         '<ol class="phases" aria-label="Project phase">' + steps + '</ol>' +
       '</article>';
     }).join('') +
-    '<article class="studio-card studio-more"><p>More work is on the way — check back soon, or <a href="#contact">reach out</a> to see it in progress.</p></article>';
+    '<article class="otb-card otb-more reveal"><p>More work is on the way — check back soon, or <a href="#contact">reach out</a> to see it in progress.</p></article>';
   }
 
-  // ---------- Case study page ----------
-  var caseEl = document.querySelector('[data-case]');
+  // ---------- Case study ----------
+  var caseEl = $('[data-case]');
   if (caseEl) renderCase();
+
+  function figure(src, caption, extra) {
+    return '<figure class="' + (extra || '') + '"><img src="' + esc(src) + '" alt="' + esc(caption) + '" loading="lazy" data-zoom />' +
+      (caption ? '<figcaption>' + esc(caption) + '</figcaption>' : '') + '</figure>';
+  }
 
   function renderCase() {
     var slug = new URLSearchParams(location.search).get('p');
     var idx = -1;
     data.projects.forEach(function (p, i) { if (p.slug === slug) idx = i; });
     if (idx < 0) {
-      caseEl.innerHTML = '<section class="wrap case-missing"><h1>Project not found</h1><p><a class="btn" href="index.html#work">Back to all work</a></p></section>';
+      caseEl.innerHTML = '<section class="not-found wrap"><p class="eyebrow"><span>404</span>Not on the plan</p><h1>Project <em>not found.</em></h1><a class="btn" href="index.html#work">Back to the work</a></section>';
       return;
     }
     var p = data.projects[idx];
-    var prev = data.projects[(idx - 1 + data.projects.length) % data.projects.length];
     var next = data.projects[(idx + 1) % data.projects.length];
     document.title = p.title + ' — Sydney Vo';
 
-    // The cover image is shown as the hero, so drop it from the gallery and reuse its caption.
     var coverItem = (p.gallery || []).filter(function (g) { return g.src === p.cover; })[0];
     var gallery = (p.gallery || []).filter(function (g) { return g.src !== p.cover; });
+    var facts = [['Course', p.course], ['Year', p.year], ['Type', p.kind], ['Software', p.software.join(', ')]].concat(p.facts || []);
 
-    var facts = [['Course', p.course], ['Year', p.year], ['Software', p.software.join(', ')]].concat(p.facts || []);
+    var h = '';
+    // Title + hero
+    h += '<section class="case-head wrap">' +
+      '<a class="back" href="index.html#work">← All work</a>' +
+      '<p class="eyebrow"><span>' + pad(idx + 1) + '</span>' + esc(p.kind) + '</p>' +
+      '<h1 class="case-title">' + esc(p.title) + (p.subtitle ? ' <span lang="ja">' + esc(p.subtitle) + '</span>' : '') + '</h1>' +
+      '<p class="case-summary">' + esc(p.summary) + '</p>' +
+    '</section>' +
+    '<figure class="case-hero' + (p.coverContain ? ' is-drawing' : '') + '">' +
+      '<img src="' + esc(p.cover) + '" alt="' + esc(p.coverAlt) + '" data-zoom style="view-transition-name:' + vtName(p.slug) + '" />' +
+      (coverItem ? '<figcaption class="wrap">' + esc(coverItem.caption) + '</figcaption>' : '') +
+    '</figure>';
 
-    var html = '' +
-      '<section class="case-head wrap">' +
-        '<a class="back" href="index.html#work">← All work</a>' +
-        '<div class="rule-label"><span>Project ' + pad(idx + 1) + '</span><i></i><b>' + esc(p.kind) + '</b></div>' +
-        '<h1>' + esc(p.title) + (p.subtitle ? ' <span lang="ja">' + esc(p.subtitle) + '</span>' : '') + '</h1>' +
-        '<dl class="facts">' + facts.map(function (f) { return '<div><dt>' + esc(f[0]) + '</dt><dd>' + esc(f[1]) + '</dd></div>'; }).join('') + '</dl>' +
-      '</section>' +
-      '<figure class="case-hero wrap' + (p.coverContain ? ' is-drawing' : '') + '"><img src="' + esc(p.cover) + '" alt="' + esc(p.coverAlt) + '" data-zoom />' +
-        (coverItem ? '<figcaption>' + esc(coverItem.caption) + '</figcaption>' : '') + '</figure>' +
-      '<section class="case-intro wrap">' +
-        '<h2 class="eyebrow">Project description</h2>' +
-        '<div class="case-text">' + p.description.map(function (t) { return '<p>' + esc(t) + '</p>'; }).join('') +
-          (p.link ? '<p><a class="link" href="' + esc(p.link.href) + '" target="_blank" rel="noopener noreferrer">' + esc(p.link.label) + ' ↗</a></p>' : '') +
-        '</div>' +
-      '</section>';
+    // Facts
+    h += '<section class="wrap"><dl class="facts">' + facts.map(function (f) {
+      return '<div><dt>' + esc(f[0]) + '</dt><dd>' + esc(f[1]) + '</dd></div>';
+    }).join('') + '</dl></section>';
+
+    // Brief + description
+    h += '<section class="case-intro wrap">' +
+      '<div class="case-brief reveal"><p class="eyebrow"><span>—</span>The brief</p><p class="brief">' + esc(p.brief) + '</p></div>' +
+      '<div class="case-text reveal"><p class="eyebrow"><span>—</span>The project</p>' + p.description.map(function (t) { return '<p>' + esc(t) + '</p>'; }).join('') +
+        (p.link ? '<p><a class="link-arrow" href="' + esc(p.link.href) + '" target="_blank" rel="noopener noreferrer">' + esc(p.link.label) + ' <span aria-hidden="true">↗</span></a></p>' : '') +
+      '</div>' +
+    '</section>';
 
     if (p.concept) {
-      html += '<section class="case-concept wrap"><h2 class="eyebrow">Concept</h2><blockquote>' + esc(p.concept) + '</blockquote></section>';
+      h += '<section class="case-concept wrap reveal"><p class="eyebrow"><span>—</span>Concept</p><blockquote>' + esc(p.concept) + '</blockquote></section>';
     }
 
     if (p.drivers && p.drivers.length) {
-      html += '<section class="case-drivers wrap"><h2 class="eyebrow">Research drivers</h2><ul>' +
-        p.drivers.map(function (d, i) { return '<li><span>' + pad(i + 1) + '</span><strong>' + esc(d[0]) + '</strong><p>' + esc(d[1]) + '</p></li>'; }).join('') +
-        '</ul></section>';
+      h += '<section class="case-drivers wrap"><p class="eyebrow"><span>—</span>Research drivers</p><ol>' +
+        p.drivers.map(function (d, i) { return '<li class="reveal"><span>' + pad(i + 1) + '</span><h3>' + esc(d[0]) + '</h3><p>' + esc(d[1]) + '</p></li>'; }).join('') +
+        '</ol></section>';
     }
 
-    html += '<section class="case-process wrap"><h2 class="eyebrow">Process</h2><ol>' +
-      p.process.map(function (s) {
-        var media = (s[2] || []).map(function (m) {
-          return '<figure><img src="' + esc(m[0]) + '" alt="' + esc(m[1]) + '" loading="lazy" data-zoom /><figcaption>' + esc(m[1]) + '</figcaption></figure>';
-        }).join('');
-        var count = (s[2] || []).length;
-        return '<li><h3>' + esc(s[0]) + '</h3><p>' + esc(s[1]) + '</p>' +
-          (media ? '<div class="step-media" data-count="' + count + '">' + media + '</div>' : '') + '</li>';
-      }).join('') +
-      '</ol></section>';
+    // Process: sticky step label + drawings
+    h += '<section class="case-process wrap"><p class="eyebrow"><span>—</span>Process</p>' +
+      p.process.map(function (s, i) {
+        var media = (s[2] || []);
+        return '<article class="step">' +
+          '<header class="step-label"><span>' + pad(i + 1) + '</span><h3>' + esc(s[0]) + '</h3></header>' +
+          '<div class="step-body"><p class="reveal">' + esc(s[1]) + '</p>' +
+            (media.length ? '<div class="step-media" data-count="' + media.length + '">' + media.map(function (m) { return figure(m[0], m[1], 'img-reveal'); }).join('') + '</div>' : '') +
+          '</div>' +
+        '</article>';
+      }).join('') + '</section>';
 
+    // Materials
+    if (p.materials && p.materials.length) {
+      h += '<section class="case-materials wrap"><p class="eyebrow"><span>—</span>Materials &amp; palette</p><ul class="materials">' +
+        p.materials.map(function (m) {
+          var sw = m.img ? '<span class="swatch" style="background-image:url(' + esc(m.img) + ')"></span>' : '<span class="swatch" style="background:' + esc(m.color) + '"></span>';
+          return '<li class="reveal">' + sw + '<strong>' + esc(m.name) + '</strong><span>' + esc(m.use) + '</span></li>';
+        }).join('') + '</ul></section>';
+    }
+
+    // Gallery
     if (gallery.length) {
-      html += '<section class="case-gallery wrap"><h2 class="eyebrow">Visuals</h2><div class="gallery">' +
+      h += '<section class="case-gallery"><div class="wrap"><p class="eyebrow"><span>—</span>Visuals</p></div><div class="gallery">' +
         gallery.map(function (g) {
-          var cls = [g.wide ? 'is-wide' : '', g.tall ? 'is-tall' : '', g.contain ? 'is-drawing' : ''].join(' ').trim();
-          return '<figure class="' + cls + '"><img src="' + esc(g.src) + '" alt="' + esc(g.caption) + '" loading="lazy" data-zoom /><figcaption>' + esc(g.caption) + '</figcaption></figure>';
+          var cls = ['img-reveal', g.wide ? 'is-wide' : '', g.tall ? 'is-tall' : '', g.contain ? 'is-drawing' : ''].join(' ');
+          return figure(g.src, g.caption, cls);
         }).join('') + '</div></section>';
     }
 
+    // Boards: horizontal strip
     if (p.boards && p.boards.length) {
-      html += '<section class="case-boards wrap"><h2 class="eyebrow">Presentation boards</h2><p class="boards-note">The full layouts from my printed portfolio. Tap any board to enlarge.</p><div class="boards">' +
-        p.boards.map(function (n, i) {
-          return '<figure><img src="assets/boards/board-' + pad(n) + '.webp" alt="' + esc(p.title) + ' — presentation board ' + (i + 1) + ' of ' + p.boards.length + '" loading="lazy" data-zoom /><figcaption>Board ' + (i + 1) + ' / ' + p.boards.length + '</figcaption></figure>';
-        }).join('') + '</div></section>';
+      h += '<section class="case-boards">' +
+        '<div class="wrap boards-head"><p class="eyebrow"><span>—</span>Presentation boards</p>' +
+          (p.boards.length > 1 ? '<div class="boards-ctrl"><button type="button" data-boards="-1" aria-label="Previous board">←</button><button type="button" data-boards="1" aria-label="Next board">→</button></div>' : '') +
+        '</div>' +
+        '<div class="boards" tabindex="0" aria-label="Presentation boards — scroll sideways">' +
+          p.boards.map(function (n, i) {
+            return figure('assets/boards/board-' + pad(n) + '.webp', 'Board ' + (i + 1) + ' / ' + p.boards.length);
+          }).join('') +
+        '</div></section>';
     }
 
-    html += '<nav class="case-nav wrap" aria-label="More projects">' +
-      '<a href="project.html?p=' + esc(prev.slug) + '"><small>← Previous</small>' + esc(prev.title) + '</a>' +
-      '<a href="project.html?p=' + esc(next.slug) + '"><small>Next →</small>' + esc(next.title) + '</a>' +
-    '</nav>';
+    // Next project
+    h += '<a class="next-project" href="project.html?p=' + esc(next.slug) + '">' +
+      '<img src="' + esc(next.cover) + '" alt="" loading="lazy" class="' + (next.coverContain ? 'is-drawing' : '') + '" />' +
+      '<span class="next-inner wrap"><span class="eyebrow"><span>→</span>Next project</span><span class="next-title">' + esc(next.title) + '</span></span>' +
+    '</a>';
 
-    caseEl.innerHTML = html;
+    caseEl.innerHTML = h;
+
+    var strip = $('.boards', caseEl);
+    $$('[data-boards]', caseEl).forEach(function (b) {
+      b.addEventListener('click', function () {
+        var fig = $('figure', strip);
+        strip.scrollBy({ left: (fig ? fig.offsetWidth + 24 : 600) * Number(b.getAttribute('data-boards')), behavior: reduceMotion ? 'auto' : 'smooth' });
+      });
+    });
+
     initLightbox();
   }
 
   // ---------- Lightbox ----------
   function initLightbox() {
-    var lb = document.getElementById('lightbox');
+    var lb = $('#lightbox');
     if (!lb) return;
-    var imgs = Array.prototype.slice.call(document.querySelectorAll('[data-zoom]'));
-    var lbImg = lb.querySelector('img');
-    var lbCap = lb.querySelector('figcaption');
-    var current = 0;
-    var lastFocus = null;
-
+    var imgs = $$('[data-zoom]');
+    var lbImg = $('img', lb), lbCap = $('figcaption', lb);
+    var current = 0, lastFocus = null;
     function show(i) {
       current = (i + imgs.length) % imgs.length;
-      var src = imgs[current];
-      lbImg.src = src.src;
-      lbImg.alt = src.alt;
-      var cap = src.closest('figure') && src.closest('figure').querySelector('figcaption');
+      lbImg.src = imgs[current].src;
+      lbImg.alt = imgs[current].alt;
+      var cap = imgs[current].closest('figure') && imgs[current].closest('figure').querySelector('figcaption');
       lbCap.textContent = cap ? cap.textContent : '';
     }
-    function open(i) {
-      lastFocus = document.activeElement;
-      show(i);
-      lb.hidden = false;
-      document.body.classList.add('nav-open');
-      lb.querySelector('.lb-close').focus();
-    }
-    function close() {
-      lb.hidden = true;
-      document.body.classList.remove('nav-open');
-      if (lastFocus) lastFocus.focus();
-    }
-
+    function open(i) { lastFocus = document.activeElement; show(i); lb.hidden = false; document.body.classList.add('nav-open'); $('.lb-close', lb).focus(); }
+    function close() { lb.hidden = true; document.body.classList.remove('nav-open'); if (lastFocus) lastFocus.focus(); }
     imgs.forEach(function (img, i) {
       img.tabIndex = 0;
       img.setAttribute('role', 'button');
       img.addEventListener('click', function () { open(i); });
-      img.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(i); }
-      });
+      img.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(i); } });
     });
-    lb.querySelector('.lb-close').addEventListener('click', close);
-    lb.querySelector('.lb-prev').addEventListener('click', function () { show(current - 1); });
-    lb.querySelector('.lb-next').addEventListener('click', function () { show(current + 1); });
+    $('.lb-close', lb).addEventListener('click', close);
+    $('.lb-prev', lb).addEventListener('click', function () { show(current - 1); });
+    $('.lb-next', lb).addEventListener('click', function () { show(current + 1); });
     lb.addEventListener('click', function (e) { if (e.target === lb) close(); });
     document.addEventListener('keydown', function (e) {
       if (lb.hidden) return;
@@ -216,16 +268,27 @@
     });
   }
 
-  // Reveal on scroll
-  if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  // ---------- "View" cursor over project images ----------
+  var cursor = $('.cursor');
+  if (cursor && finePointer && !reduceMotion) {
+    document.addEventListener('mousemove', function (e) {
+      cursor.style.transform = 'translate(' + e.clientX + 'px,' + e.clientY + 'px)';
+      var over = e.target.closest && e.target.closest('[data-cursor], [data-zoom], .next-project');
+      cursor.classList.toggle('is-on', !!over);
+      if (over) $('span', cursor).textContent = over.hasAttribute('data-zoom') ? 'Enlarge' : 'View';
+    });
+    document.addEventListener('mouseleave', function () { cursor.classList.remove('is-on'); });
+  }
+
+  // ---------- Reveal on scroll ----------
+  var revealables = $$('.reveal, .img-reveal');
+  if ('IntersectionObserver' in window && !reduceMotion) {
+    document.documentElement.classList.add('can-reveal');
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
         if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); }
       });
-    }, { rootMargin: '0px 0px -8% 0px' });
-    document.querySelectorAll('.work-card, .studio-card, .section-head, .case-gallery figure, .case-boards figure, .step-media').forEach(function (el) {
-      el.classList.add('reveal');
-      io.observe(el);
-    });
+    }, { rootMargin: '0px 0px -10% 0px' });
+    revealables.forEach(function (el) { io.observe(el); });
   }
 })();

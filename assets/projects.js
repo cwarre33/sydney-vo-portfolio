@@ -16,6 +16,13 @@ window.PORTFOLIO = {
   projects: [
     {
       slug: 'kenko',
+      brief: 'Design a 5,000 sq ft wellness center on one of Raleigh’s busiest corridors that still feels calm the moment you walk in.',
+      materials: [
+        { name: 'Walnut', use: 'Reception desk slats', img: 'assets/materials/walnut.webp' },
+        { name: 'Ashbee Oak', use: 'Tea bar casework', img: 'assets/materials/ashbee-oak.webp' },
+        { name: 'Kabina Apple Green', use: 'Tea bar tile', img: 'assets/materials/kabina-apple-green.webp' },
+        { name: 'Corian Stonique', use: 'Counter surfaces', img: 'assets/materials/corian-stonique.webp' }
+      ],
       title: 'Kenko',
       subtitle: 'ケンコー',
       kind: 'Commercial wellness center',
@@ -56,6 +63,13 @@ window.PORTFOLIO = {
     },
     {
       slug: 'cad-lab',
+      brief: 'Turn a rigid, outdated campus computer lab into a studio built for collaboration, comfort, and long-term student wellness.',
+      materials: [
+        { name: 'Accent wall paint', use: 'Instructor focal wall', color: '#121212' },
+        { name: 'Wall paint', use: 'Perimeter walls', color: '#F5F4ED' },
+        { name: 'Static-control tile', use: 'ESD-safe flooring', color: '#454A50' },
+        { name: 'Raspberry', use: 'Furniture color', color: '#693F52' }
+      ],
       title: 'Meredith CAD Lab',
       kind: 'Higher-ed computer lab',
       course: 'ID 342 · Special Problems in CADD',
@@ -89,6 +103,7 @@ window.PORTFOLIO = {
     },
     {
       slug: 'commercial-mural',
+      brief: 'Give an 80,000 sq ft warehouse a brand presence that reads at architectural scale.',
       title: 'Commercial Mural',
       kind: 'Exterior environmental graphic',
       course: 'MM Interior Design Group · Internship',
@@ -114,6 +129,12 @@ window.PORTFOLIO = {
     },
     {
       slug: 'zanzibar',
+      brief: 'Re-imagine the showroom behind Furnitureland South’s main reception desk around Lexington’s Zanzibar collection.',
+      materials: [
+        { name: 'Sealskin', use: 'Sherwin-Williams SW 7675', color: '#48423C' },
+        { name: 'Pure White', use: 'Sherwin-Williams SW 7005', color: '#EDECE6' },
+        { name: 'Snowbound', use: 'Sherwin-Williams SW 7004', color: '#EEEBE6' }
+      ],
       title: 'Zanzibar',
       kind: 'Retail showroom vignette',
       course: 'Furnitureland South · Visual Merchandising & Design Internship',
@@ -141,6 +162,7 @@ window.PORTFOLIO = {
     },
     {
       slug: 'sears-modern-home',
+      brief: 'Bring an early-20th-century Sears kit home into contemporary life while keeping its historic character.',
       title: 'Sears Modern Home',
       kind: 'Historic residential revitalization',
       course: 'ID 244 · Interior Design II',
@@ -167,6 +189,7 @@ window.PORTFOLIO = {
     },
     {
       slug: 'interior-design-office',
+      brief: 'Plan a functional, ADA-compliant design office entirely by hand.',
       title: 'Interior Design Office',
       kind: 'Commercial office',
       course: 'ID 144 · Interior Design I',

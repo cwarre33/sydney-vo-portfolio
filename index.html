@@ -4,191 +4,211 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sydney Vo — Interior Design Portfolio</title>
-  <meta name="description" content="Sydney Vo — interior design portfolio. Accessible, inclusive, human-centered spaces. B.S. Interior Design, Meredith College, 2027." />
+  <meta name="description" content="Sydney Vo — interior designer. Accessible, inclusive, human-centered interiors. B.S. Interior Design, Meredith College, 2027." />
   <meta property="og:title" content="Sydney Vo — Interior Design Portfolio" />
-  <meta property="og:description" content="Selected work 2023–2026: Kenko wellness center, Meredith CAD Lab, Zanzibar, Sears Modern Home and more." />
+  <meta property="og:description" content="Selected work 2023–2026: Kenko wellness center, Meredith CAD Lab, Commercial Mural, Zanzibar, Sears Modern Home and more." />
   <meta property="og:image" content="assets/img/kenko-teabar.webp" />
+  <meta name="theme-color" content="#F4F1EB" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;800;900&family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=DM+Serif+Display:ital@0;1&family=Public+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
+<body class="is-home">
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <header class="site-header">
+  <header class="site-header" data-header>
     <div class="header-inner">
-      <a href="#top" class="logo" aria-label="Sydney Vo — home"><span>S</span><i aria-hidden="true"></i><span>V</span></a>
-      <nav class="nav" id="mobile-nav" aria-label="Main">
+      <a href="#top" class="brand" aria-label="Sydney Vo — home">Sydney Vo</a>
+      <nav class="nav" id="site-nav" aria-label="Main">
         <ul>
-          <li><a href="#work">Work</a></li>
-          <li><a href="#studio">In the studio</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#resume">Résumé</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="#work"><span>01</span>Work</a></li>
+          <li><a href="#on-the-boards"><span>02</span>On the boards</a></li>
+          <li><a href="#about"><span>03</span>About</a></li>
+          <li><a href="#experience"><span>04</span>Experience</a></li>
+          <li><a href="#contact"><span>05</span>Contact</a></li>
         </ul>
       </nav>
-      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
-        <span></span><span></span>
-      </button>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav"><span></span><span></span></button>
     </div>
   </header>
 
   <main id="main">
     <!-- Cover -->
     <section class="cover" id="top">
-      <div class="rule-label wrap"><span>Portfolio</span><i></i><b>2026</b></div>
-      <div class="cover-grid wrap">
+      <div class="cover-panel">
+        <div class="cover-rule"><span>Portfolio</span><i></i><b>2026</b></div>
         <div class="cover-mark">
           <img class="logo-mark" src="assets/img/logo.png" alt="" width="808" height="568" />
-          <h1 class="sr-only">Sydney Vo</h1>
+          <h1 class="sr-only">Sydney Vo, Interior Designer</h1>
           <p class="cover-kicker">Interior Design Portfolio</p>
-          <p class="cover-meta">Meredith College<br />Expected graduation May 2027<br />Selected work 2023 – 2026</p>
-          <p class="cover-lede">Designing spaces that are intuitive, functional, and welcoming for <em>everyone</em> who moves through them.</p>
-          <div class="cover-actions">
-            <a href="#work" class="btn">View the work</a>
-            <a href="#contact" class="btn btn-ghost">Get in touch</a>
-          </div>
+          <p class="cover-meta">Meredith College · Class of 2027<br />Selected work 2023 – 2026</p>
         </div>
-        <figure class="cover-image">
-          <img src="assets/img/kenko-teabar.webp" alt="Kenko tea bar — raised platform seating by the windows, warm wood and green tile" fetchpriority="high" />
-          <figcaption><span>01</span> Kenko — tea bar, Spring 2026</figcaption>
-        </figure>
+        <a class="cover-scroll" href="#intro"><span>Scroll</span><i aria-hidden="true"></i></a>
       </div>
+      <figure class="cover-image">
+        <img src="assets/img/kenko-teabar.webp" alt="Kenko tea bar — raised platform seating by tall windows, warm wood and green tile" fetchpriority="high" />
+        <figcaption>Kenko — tea bar &nbsp;/&nbsp; Spring 2026</figcaption>
+      </figure>
+    </section>
+
+    <!-- Statement -->
+    <section class="intro wrap" id="intro">
+      <p class="intro-statement reveal">Good design must be inherently accessible and inclusive — <em>intuitive, highly functional, and welcoming</em> for everyone who moves through it.</p>
+      <dl class="intro-facts reveal">
+        <div><dt>Studying</dt><dd>B.S. Interior Design<br />Meredith College, 2027</dd></div>
+        <div><dt>Interned at</dt><dd>MM Interior Design Group<br />Lauren Ashley Design<br />Furnitureland South</dd></div>
+        <div><dt>Works in</dt><dd>AutoCAD, Revit, SketchUp, Enscape &amp; by hand</dd></div>
+      </dl>
     </section>
 
     <!-- Work -->
-    <section id="work" class="section">
+    <section class="work" id="work">
       <div class="wrap">
-        <div class="rule-label"><span>Contents</span><i></i><b>06 projects</b></div>
         <header class="section-head">
-          <h2>Selected work</h2>
-          <p>Commercial, residential, retail, and built work — from hand drafting to Revit and Enscape.</p>
+          <p class="eyebrow"><span>01</span>Selected work</p>
+          <h2 class="section-title reveal">Spaces designed<br /><em>for everyone</em></h2>
         </header>
-        <div class="work-grid" id="work-grid"><!-- rendered from assets/projects.js --></div>
       </div>
+      <div class="features" id="features"><!-- rendered from assets/projects.js --></div>
+
+      <div class="wrap">
+        <div class="index">
+          <p class="eyebrow"><span>—</span>Project index</p>
+          <ol class="index-list" id="index-list"><!-- rendered --></ol>
+        </div>
+      </div>
+      <figure class="index-preview" aria-hidden="true"><img alt="" /></figure>
     </section>
 
-    <!-- In progress -->
-    <section id="studio" class="section studio">
+    <!-- On the boards -->
+    <section class="otb" id="on-the-boards">
       <div class="wrap">
-        <div class="rule-label"><span>In the studio</span><i></i><b>2026 – 27</b></div>
         <header class="section-head">
-          <h2>Upcoming</h2>
-          <p>Work that’s on the drafting table right now. Full case studies will land here as each project wraps.</p>
+          <p class="eyebrow"><span>02</span>On the boards</p>
+          <h2 class="section-title reveal">In progress <em>now</em></h2>
+          <p class="section-lede reveal">Work that’s on the drafting table right now. Full case studies land here as each project wraps.</p>
         </header>
-        <div class="studio-grid" id="studio-grid"><!-- rendered from assets/projects.js --></div>
+        <div class="otb-grid" id="otb-grid"><!-- rendered --></div>
       </div>
     </section>
 
     <!-- About -->
-    <section id="about" class="section about">
-      <div class="wrap about-grid">
-        <div>
-          <div class="rule-label"><span>About me</span><i></i></div>
-          <h2 class="about-title">Good design is accessible design.</h2>
-        </div>
-        <div class="about-body">
-          <p>Hi, I’m Sydney Vo, a senior at Meredith College pursuing a Bachelor of Science in Interior Design with minors in Marketing and Studio Arts. My passion for design began early, working on creative projects with my dad, and my background in STEM shaped a mindset that bridges logical structure with creative vision.</p>
-          <p>I believe good design must be inherently accessible and inclusive, so I work to create environments that are intuitive, highly functional, and welcoming for everyone who moves through them.</p>
-          <p>Through internships at Furnitureland South, Lauren Ashley Design LLC, and MM Interior Design Group, I’ve built a strong foundation in AutoCAD, SketchUp, Enscape, visual storytelling, and site coordination. I keep learning through new digital tools, creative crafts, and sharper technical skills, and I’m committed to making a meaningful, lasting difference in the profession.</p>
+    <section class="about wrap" id="about">
+      <header class="section-head">
+        <p class="eyebrow"><span>03</span>About</p>
+      </header>
+      <div class="about-grid">
+        <h2 class="about-title reveal">Logic and creativity, <em>on the same plan.</em></h2>
+        <div class="about-body reveal">
+          <p>Hi, I’m Sydney Vo, a senior at Meredith College pursuing a Bachelor of Science in Interior Design with minors in Marketing and Studio Arts.</p>
+          <p>My passion for design began early, working on creative projects with my dad, and my background in STEM shaped a mindset that bridges logical structure with creative vision. I believe good design must be inherently accessible and inclusive, so I work to create environments that are intuitive, highly functional, and welcoming for everyone.</p>
+          <p>Through internships at Furnitureland South, Lauren Ashley Design LLC, and MM Interior Design Group, I’ve built a strong foundation in AutoCAD, SketchUp, Enscape, visual storytelling, and site coordination — and I keep learning through new digital tools, creative crafts, and sharper technical skills.</p>
           <img class="signature" src="assets/img/signature.png" alt="Sydney Vo signature" width="385" height="147" loading="lazy" />
         </div>
       </div>
+      <ol class="principles">
+        <li class="reveal"><span>01</span><h3>Accessible by default</h3><p>Dual-height counters, clear circulation, and ADA-compliant planning are part of the concept, not an afterthought.</p></li>
+        <li class="reveal"><span>02</span><h3>Structure meets vision</h3><p>A STEM background shapes how I organize a plan — then material, light, and color make it feel human.</p></li>
+        <li class="reveal"><span>03</span><h3>Always learning</h3><p>From hand drafting to Revit and Enscape, I keep adding tools, crafts, and technical skills to the toolkit.</p></li>
+      </ol>
     </section>
 
-    <!-- Résumé -->
-    <section id="resume" class="section resume">
+    <!-- Experience -->
+    <section class="experience" id="experience">
       <div class="wrap">
-        <div class="rule-label rule-label-links"><span>Résumé</span><i></i><b><a href="reference_content/SydneyVo_2026_Resume.pdf" download>Résumé PDF ↓</a><a href="reference_content/Interior%20Design%20Portfolio%20-%20Sydney%20Vo.pdf" download>Portfolio PDF ↓</a></b></div>
-        <div class="resume-grid">
-          <div class="resume-col">
-            <h3>Design experience</h3>
-            <article class="job">
-              <header><strong>MM Interior Design Group</strong><span>May 2025 – Jul 2025 · Returning early 2027</span></header>
-              <em>Interior Design Intern · Greensboro, NC</em>
-              <p>Supported residential and commercial projects through space planning, detailed AutoCAD drafting, and 3D renderings in SketchUp and Enscape. Curated color and finish schemes, prepared client presentations, and managed library resources and vendor communication.</p>
-            </article>
-            <article class="job">
-              <header><strong>Lauren Ashley Design LLC</strong><span>Aug 2025 – Dec 2025</span></header>
-              <em>Interior Design Intern · Remote</em>
-              <p>Collaborated on design development by producing AutoCAD plans, rendering SketchUp models, and assembling mood boards and finish options. Streamlined workflows through digital library organization, vendor resource management, and client presentation prep.</p>
-            </article>
-            <article class="job">
-              <header><strong>Furnitureland South</strong><span>Jun 2025 – Jul 2025</span></header>
-              <em>Visual Merchandising &amp; Design Intern · Jamestown, NC</em>
-              <p>Assisted designers in researching, building, and installing interactive showroom displays from concept to completion. Conceived and executed a full-scale retail vignette and presented insights on visual merchandising and store layout.</p>
-            </article>
-            <h3>Other experience</h3>
-            <ul class="plain">
-              <li><span class="role"><strong>Olive Garden</strong> — Hostess &amp; Certified Trainer</span><span>Oct 2021 – present</span></li>
-              <li><span class="role"><strong>Molten MakerSpace</strong> — Admin Assistant</span><span>May – Aug 2026</span></li>
-            </ul>
-          </div>
-          <div class="resume-col">
+        <header class="section-head">
+          <p class="eyebrow"><span>04</span>Experience</p>
+          <h2 class="section-title reveal">Practice &amp; <em>training</em></h2>
+          <p class="section-lede downloads reveal"><a href="reference_content/SydneyVo_2026_Resume.pdf" download>Résumé (PDF) ↓</a><a href="reference_content/Interior%20Design%20Portfolio%20-%20Sydney%20Vo.pdf" download>Portfolio (PDF) ↓</a></p>
+        </header>
+
+        <ol class="timeline">
+          <li class="reveal">
+            <span class="t-date">May – Jul 2025<small>Returning early 2027</small></span>
+            <div class="t-role"><h3>MM Interior Design Group</h3><p>Interior Design Intern · Greensboro, NC</p></div>
+            <p class="t-desc">Supported residential and commercial projects through space planning, detailed AutoCAD drafting, and 3D renderings in SketchUp and Enscape. Curated color and finish schemes, prepared client presentations, and managed library resources and vendor communication.</p>
+          </li>
+          <li class="reveal">
+            <span class="t-date">Aug – Dec 2025</span>
+            <div class="t-role"><h3>Lauren Ashley Design LLC</h3><p>Interior Design Intern · Remote</p></div>
+            <p class="t-desc">Collaborated on design development by producing AutoCAD plans, rendering SketchUp models, and assembling mood boards and finish options. Streamlined workflows through digital library organization, vendor resource management, and client presentation prep.</p>
+          </li>
+          <li class="reveal">
+            <span class="t-date">Jun – Jul 2025</span>
+            <div class="t-role"><h3>Furnitureland South</h3><p>Visual Merchandising &amp; Design Intern · Jamestown, NC</p></div>
+            <p class="t-desc">Assisted designers in researching, building, and installing interactive showroom displays from concept to completion. Conceived and executed a full-scale retail vignette and presented insights on visual merchandising and store layout.</p>
+          </li>
+        </ol>
+
+        <div class="cv-grid">
+          <div class="cv-block reveal">
             <h3>Education</h3>
-            <p><strong>Meredith College</strong><br />B.S. Interior Design · Minors in Marketing &amp; Studio Arts<br />Expected May 2027 · 3.94 GPA</p>
-            <p class="fine">Meredith College’s Interior Design program is accredited by the Council for Interior Design Accreditation (CIDA).</p>
+            <p><strong>Meredith College</strong><br />B.S. Interior Design<br />Minors in Marketing &amp; Studio Arts<br />Expected May 2027 · 3.94 GPA</p>
+            <p class="fine">CIDA-accredited Interior Design program.</p>
+          </div>
+          <div class="cv-block reveal">
             <h3>Honors</h3>
-            <ul class="plain">
+            <ul class="cv-list">
               <li>Dean’s List <span>All semesters</span></li>
               <li>Academic Merit Scholarship <span>All semesters</span></li>
               <li>Meredith–Rumley Promise Scholarship <span>All semesters</span></li>
               <li>Sandra Graham Shelton Scholarship for Interior Design <span>All semesters</span></li>
               <li>Japanese National Honor Society <span>Honoree</span></li>
             </ul>
-            <h3>Languages</h3>
-            <ul class="plain">
-              <li>English <span>Native</span></li>
-              <li>Vietnamese <span>Elementary</span></li>
-            </ul>
           </div>
-          <div class="resume-col">
+          <div class="cv-block cv-wide reveal">
             <h3>Software</h3>
-            <ul class="chips chips-icons">
-              <li><img src="assets/icons/autocad.png" alt="" width="24" height="24" loading="lazy" />AutoCAD</li>
-              <li><img src="assets/icons/revit.png" alt="" width="24" height="24" loading="lazy" />Revit</li>
-              <li><img src="assets/icons/sketchup.png" alt="" width="24" height="24" loading="lazy" />SketchUp</li>
-              <li><img src="assets/icons/enscape.png" alt="" width="24" height="24" loading="lazy" />Enscape</li>
-              <li><img src="assets/icons/photoshop.png" alt="" width="24" height="24" loading="lazy" />Photoshop</li>
-              <li><img src="assets/icons/illustrator.png" alt="" width="24" height="24" loading="lazy" />Illustrator</li>
-              <li><img src="assets/icons/indesign.png" alt="" width="24" height="24" loading="lazy" />InDesign</li>
-              <li><img src="assets/icons/canva.png" alt="" width="24" height="24" loading="lazy" />Canva</li>
-              <li><img src="assets/icons/office.png" alt="" width="24" height="24" loading="lazy" />Microsoft Office</li>
-              <li><img src="assets/icons/google.png" alt="" width="24" height="24" loading="lazy" />Google Suite</li>
-            </ul>
-            <h3>Additional skills</h3>
-            <ul class="chips">
-              <li>Hand drafting</li><li>Sketching</li><li>Physical models</li><li>Space planning</li><li>Mood boards</li><li>Material sourcing</li>
-            </ul>
-            <h3>Off the clock</h3>
-            <ul class="chips chips-soft">
-              <li>Knitting</li><li>Photography</li><li>Sewing</li><li>Painting</li><li>Hiking</li>
+            <ul class="software">
+              <li><img src="assets/icons/autocad.png" alt="" width="40" height="40" loading="lazy" />AutoCAD</li>
+              <li><img src="assets/icons/revit.png" alt="" width="40" height="40" loading="lazy" />Revit</li>
+              <li><img src="assets/icons/sketchup.png" alt="" width="40" height="40" loading="lazy" />SketchUp</li>
+              <li><img src="assets/icons/enscape.png" alt="" width="40" height="40" loading="lazy" />Enscape</li>
+              <li><img src="assets/icons/photoshop.png" alt="" width="40" height="40" loading="lazy" />Photoshop</li>
+              <li><img src="assets/icons/illustrator.png" alt="" width="40" height="40" loading="lazy" />Illustrator</li>
+              <li><img src="assets/icons/indesign.png" alt="" width="40" height="40" loading="lazy" />InDesign</li>
+              <li><img src="assets/icons/canva.png" alt="" width="40" height="40" loading="lazy" />Canva</li>
+              <li><img src="assets/icons/office.png" alt="" width="40" height="40" loading="lazy" />Microsoft Office</li>
+              <li><img src="assets/icons/google.png" alt="" width="40" height="40" loading="lazy" />Google Suite</li>
             </ul>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact" class="section contact">
-      <div class="wrap">
-        <div class="rule-label"><span>Contact</span><i></i></div>
-        <h2 class="contact-title">Let’s design something<br /><em>everyone</em> can use.</h2>
-        <div class="contact-links">
-          <a href="mailto:sydneyvo.interior@gmail.com"><small>Email</small>sydneyvo.interior@gmail.com</a>
-          <a href="https://www.linkedin.com/in/sydney-vo-tbv" target="_blank" rel="noopener noreferrer"><small>LinkedIn</small>in/sydney-vo-tbv ↗</a>
+          <div class="cv-block reveal">
+            <h3>Additional skills</h3>
+            <p class="tags">Hand drafting · Sketching · Physical models · Space planning · Mood boards · Material sourcing</p>
+          </div>
+          <div class="cv-block reveal">
+            <h3>Other experience</h3>
+            <p class="tags">Olive Garden — Hostess &amp; Certified Trainer, 2021 – present<br />Molten MakerSpace — Admin Assistant, 2026</p>
+          </div>
+          <div class="cv-block reveal">
+            <h3>Languages</h3>
+            <p class="tags">English (native) · Vietnamese (elementary)</p>
+          </div>
+          <div class="cv-block reveal">
+            <h3>Off the clock</h3>
+            <p class="tags">Knitting · Photography · Sewing · Painting · Hiking</p>
+          </div>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
+  <footer class="site-footer" id="contact">
     <div class="wrap">
-      <span>© <span id="year"></span> Sydney Vo</span>
-      <span>Interior Design · Meredith College ’27</span>
+      <p class="eyebrow"><span>05</span>Contact</p>
+      <h2 class="footer-title">Let’s design something <em>everyone</em> can use.</h2>
+      <a class="footer-email" href="mailto:sydneyvo.interior@gmail.com">sydneyvo.interior@gmail.com <span aria-hidden="true">↗</span></a>
+      <div class="footer-grid">
+        <div><h3>Elsewhere</h3><a href="https://www.linkedin.com/in/sydney-vo-tbv" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></div>
+        <div><h3>Downloads</h3><a href="reference_content/SydneyVo_2026_Resume.pdf" download>Résumé (PDF)</a><a href="reference_content/Interior%20Design%20Portfolio%20-%20Sydney%20Vo.pdf" download>Portfolio (PDF)</a></div>
+        <div><h3>Based in</h3><p>Raleigh &amp; Jamestown, NC</p></div>
+        <img class="footer-sig" src="assets/img/signature.png" alt="" width="385" height="147" loading="lazy" />
+      </div>
+      <div class="footer-base"><span>© <span data-year></span> Sydney Vo</span><a href="#top">Back to top ↑</a></div>
     </div>
   </footer>
+
+  <div class="cursor" aria-hidden="true"><span>View</span></div>
 
   <script src="assets/projects.js"></script>
   <script src="script.js"></script>
