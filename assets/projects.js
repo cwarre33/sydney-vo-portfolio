@@ -42,15 +42,16 @@ window.PORTFOLIO = {
       ],
       process: [
         ['Programming', 'Studied the site on Raleigh’s high-density Hillsborough Street corridor and documented the existing floor plan. The 5,000 sq ft excludes the existing stair and elevator shaft.', [['assets/kenko/site-location.webp', 'Site location — 2508½ Hillsborough St, Raleigh'], ['assets/kenko/original-floorplan.webp', 'Original floor plan']]],
-        ['Schematic Design', 'Block-diagram iterations refined functional zoning, room adjacencies, and circulation. The final footprint splits active and quiet zones: reception, retail, and tea bar face Hillsborough Street, while studios and amenities transition toward the quiet rear alley. Sections keep the original 14′-0″ floor-to-deck clearance, with dropped ceilings in select zones for human scale and acoustic comfort.', [['assets/kenko/block-diagram-1.webp', 'Block diagram — first iteration'], ['assets/kenko/block-diagram-2.webp', 'Block diagram — refined iteration'], ['assets/kenko/new-floorplan.webp', 'New floor plan (excluding elevator shaft & stairs)'], ['assets/kenko/rendered-floorplan.webp', 'Rendered floor plan'], ['assets/kenko/section-front.webp', 'Front section'], ['assets/kenko/section-back.webp', 'Back section']]],
-        ['Design Development', 'Custom millwork for the reception desk and tea bar counter uses dual counter heights, durable surfaces, and integrated storage to meet ADA standards without sacrificing style. A lighting plan sets the overall intent and ambiance.', [['assets/kenko/millwork-reception.webp', 'Custom reception desk — front & back'], ['assets/kenko/teabar-sketches.webp', 'Tea bar — millwork sketches'], ['assets/kenko/millwork-teabar.webp', 'Custom tea bar counter — front & back'], ['assets/process/kenko-lighting.webp', 'Lighting plan']]]
+        ['Schematic Design', 'Block-diagram iterations refined functional zoning, room adjacencies, and circulation. The final footprint splits active and quiet zones: reception, retail, and tea bar face Hillsborough Street, while studios and amenities transition toward the quiet rear alley. Sections keep the original 14′-0″ floor-to-deck clearance, with dropped ceilings in select zones for human scale and acoustic comfort.', [['assets/kenko/block-diagram-1.webp', 'Block diagram — multiple iterations'], ['assets/kenko/block-diagram-2.webp', 'Block diagram — multiple iterations'], ['assets/kenko/new-floorplan.webp', 'New floor plan (excluding elevator shaft & stairs)'], ['assets/kenko/rendered-floorplan.webp', 'Rendered floor plan'], ['assets/kenko/section-front.webp', 'Front section'], ['assets/kenko/section-back.webp', 'Back section']]],
+        ['Design Development', 'Custom millwork for the reception desk and tea bar counter uses dual counter heights, durable surfaces, and integrated storage to meet ADA standards without sacrificing style. A lighting plan sets the overall intent and ambiance.', [
+          { row: [['assets/kenko/teabar-sketches.webp', 'Tea bar — millwork sketches'], ['assets/kenko/millwork-teabar.webp', 'Custom tea bar counter — front & back']],
+            finishes: [['Ashbee Oak', 'assets/kenko/dd/ashbee-oak.webp'], ['Kabina Apple Green', 'assets/kenko/dd/kabina-apple-green.webp'], ['Corian Stonique', 'assets/kenko/dd/corian-stonique.webp']] },
+          { row: [['assets/kenko/dd/reception-sketch.webp', 'Reception desk — sketch options'], ['assets/kenko/millwork-reception.webp', 'Custom reception desk — front & back']],
+            finishes: [['Walnut', 'assets/kenko/dd/walnut.webp'], ['Corian Stonique', 'assets/kenko/dd/corian-stonique.webp']] },
+          ['assets/kenko/dd/lighting-plan.webp', 'Lighting plan']]]
       ],
-      materials: [
-        { name: 'Walnut', use: 'Reception desk slats', img: 'assets/materials/walnut.webp' },
-        { name: 'Ashbee Oak', use: 'Tea bar casework', img: 'assets/materials/ashbee-oak.webp' },
-        { name: 'Kabina Apple Green', use: 'Tea bar tile', img: 'assets/materials/kabina-apple-green.webp' },
-        { name: 'Corian Stonique', use: 'Counter surfaces', img: 'assets/materials/corian-stonique.webp' }
-      ],
+      finishesImage: 'assets/kenko/finishes.png',
+      materials: [{ name: 'Finishes' }],
       gallery: [
         { src: 'assets/kenko/teabar-platform.webp', caption: 'Tea bar — platform seating view. Inspired by traditional Japanese teahouses, warm wood, green tile accents, and soft pendant light create a place to gather and relax.', wide: true },
         { src: 'assets/kenko/teabar-1.webp', caption: 'Tea bar' },
@@ -188,6 +189,7 @@ window.PORTFOLIO = {
       software: ['Hand drafting'],
       facts: [],
       cover: 'assets/office/furniture-plan.webp',
+      cardImage: 'assets/img/office-furniture.webp',
       coverAlt: 'Hand-drafted furniture plan of a design office',
       coverContain: true,
       summary: 'Where it started — a fully hand-drafted office plan built on space-planning fundamentals.',

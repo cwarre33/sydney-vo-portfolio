@@ -47,7 +47,7 @@
     workGrid.innerHTML = data.projects.map(function (p, i) {
       return '<a class="work-card' + (i === 0 ? ' is-feature' : '') + '" href="project.html?p=' + esc(p.slug) + '">' +
         '<div class="work-media' + (p.coverContain ? ' is-drawing' : '') + '">' +
-          '<img src="' + esc(p.cover) + '" alt="' + esc(p.coverAlt) + '" loading="' + (i < 2 ? 'eager' : 'lazy') + '" />' +
+          '<img src="' + esc(p.cardImage || p.cover) + '" alt="' + esc(p.coverAlt) + '" loading="' + (i < 2 ? 'eager' : 'lazy') + '" />' +
         '</div>' +
         '<div class="work-info">' +
           '<span class="work-num">' + pad(i + 1) + '</span>' +
@@ -125,12 +125,9 @@
         '</div>' +
       '</section>';
 
-    // Concept sits beside the finishes palette so the section is filled out.
-    var mats = p.materials || [];
-    var matsHtml = mats.length ? '<ul class="materials">' + mats.map(function (m) {
-      var sw = m.img ? '<span class="swatch" style="background-image:url(' + esc(m.img) + ')"></span>' : '<span class="swatch" style="background:' + esc(m.color) + '"></span>';
-      return '<li>' + sw + '<strong>' + esc(m.name) + '</strong><span>' + esc(m.use) + '</span></li>';
-    }).join('') + '</ul>' : '';
+    // Concept sits beside the finishes board so the section is filled out.
+    var mats = p.finishesImage ? (p.materials || []) : [];
+    var matsHtml = (mats.length && p.finishesImage) ? '<div class="finishes"><img src="' + esc(p.finishesImage) + '" alt="Finish samples" loading="lazy" /></div>' : '';
     if (p.concept) {
       html += '<section class="case-concept wrap' + (mats.length ? ' has-materials' : '') + '">' +
         '<div><h2 class="eyebrow">Concept</h2><blockquote>' + esc(p.concept) + '</blockquote></div>' +
@@ -147,8 +144,16 @@
 
     html += '<section class="case-process wrap"><h2 class="eyebrow">Process</h2><ol>' +
       p.process.map(function (s) {
-        var media = (s[2] || []).map(function (m) {
+        function fig(m) {
           return '<figure><img src="' + esc(m[0]) + '" alt="' + esc(m[1]) + '" loading="lazy" data-zoom /><figcaption>' + esc(m[1]) + '</figcaption></figure>';
+        }
+        var media = (s[2] || []).map(function (m) {
+          if (!m.row) return fig(m);
+          // A row of drawings with the finishes used, side by side
+          return '<div class="step-row">' + m.row.map(fig).join('') +
+            (m.finishes ? '<div class="step-finishes"><h4>Finishes</h4><ul>' + m.finishes.map(function (f) {
+              return '<li><img src="' + esc(f[1]) + '" alt="" loading="lazy" /><span>' + esc(f[0]) + '</span></li>';
+            }).join('') + '</ul></div>' : '') + '</div>';
         }).join('');
         var count = (s[2] || []).length;
         return '<li><h3>' + esc(s[0]) + '</h3><p>' + esc(s[1]) + '</p>' +
@@ -177,6 +182,10 @@
     '</nav>';
 
     caseEl.innerHTML = html;
+    caseEl.querySelectorAll('.step-media img').forEach(function (img) {
+      function mark() { if (img.naturalWidth / img.naturalHeight > 1.9) img.closest('figure').classList.add('is-wide'); }
+      if (img.complete) mark(); else img.addEventListener('load', mark);
+    });
     initLightbox();
   }
 
