@@ -126,11 +126,8 @@
       '</section>';
 
     // Concept sits beside the finishes board so the section is filled out.
-    var mats = p.materials || [];
-    var matsHtml = mats.length ? '<div class="finishes">' +
-      '<ul>' + mats.map(function (m) { return '<li>' + esc(m.name) + '<span>' + esc(m.use) + '</span></li>'; }).join('') + '</ul>' +
-      (p.finishesImage ? '<img src="' + esc(p.finishesImage) + '" alt="Finish samples: ' + esc(mats.map(function (m) { return m.name; }).join(', ')) + '" loading="lazy" />' : '') +
-    '</div>' : '';
+    var mats = p.finishesImage ? (p.materials || []) : [];
+    var matsHtml = (mats.length && p.finishesImage) ? '<div class="finishes"><img src="' + esc(p.finishesImage) + '" alt="Finish samples" loading="lazy" /></div>' : '';
     if (p.concept) {
       html += '<section class="case-concept wrap' + (mats.length ? ' has-materials' : '') + '">' +
         '<div><h2 class="eyebrow">Concept</h2><blockquote>' + esc(p.concept) + '</blockquote></div>' +
@@ -147,8 +144,16 @@
 
     html += '<section class="case-process wrap"><h2 class="eyebrow">Process</h2><ol>' +
       p.process.map(function (s) {
-        var media = (s[2] || []).map(function (m) {
+        function fig(m) {
           return '<figure><img src="' + esc(m[0]) + '" alt="' + esc(m[1]) + '" loading="lazy" data-zoom /><figcaption>' + esc(m[1]) + '</figcaption></figure>';
+        }
+        var media = (s[2] || []).map(function (m) {
+          if (!m.row) return fig(m);
+          // A row of drawings with the finishes used, side by side
+          return '<div class="step-row">' + m.row.map(fig).join('') +
+            (m.finishes ? '<div class="step-finishes"><h4>Finishes</h4><ul>' + m.finishes.map(function (f) {
+              return '<li><img src="' + esc(f[1]) + '" alt="" loading="lazy" /><span>' + esc(f[0]) + '</span></li>';
+            }).join('') + '</ul></div>' : '') + '</div>';
         }).join('');
         var count = (s[2] || []).length;
         return '<li><h3>' + esc(s[0]) + '</h3><p>' + esc(s[1]) + '</p>' +
