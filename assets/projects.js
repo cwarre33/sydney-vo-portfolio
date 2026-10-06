@@ -187,7 +187,7 @@ window.PORTFOLIO = {
       year: 'Fall 2023',
       software: ['Hand drafting'],
       facts: [],
-      cover: 'assets/img/office-furniture.webp',
+      cover: 'assets/office/furniture-plan.webp',
       coverAlt: 'Hand-drafted furniture plan of a design office',
       coverContain: true,
       summary: 'Where it started — a fully hand-drafted office plan built on space-planning fundamentals.',
@@ -196,13 +196,13 @@ window.PORTFOLIO = {
         'The layout emphasizes clear spatial organization, efficient circulation, and ADA-compliant accessibility to create a functional, well-proportioned workspace.'
       ],
       process: [
-        ['Schematic Design', 'Room-by-room studies and bubble plans for reception, conference, private offices, and work areas.', [['assets/process/office-schematic.webp', 'Room studies and schematic plan']]],
-        ['Space & Furniture Plan', 'Hand-drafted space plan and furniture plan with a lighting legend.', [['assets/process/office-space.webp', 'Space plan'], ['assets/process/office-furniture-plan.webp', 'Furniture plan']]],
-        ['Elevation & Section', 'Drafted elevation and section details to finish the drawing set.', [['assets/process/office-elevation.webp', 'Elevation and section']]]
+        ['Schematic Design', 'Room-by-room studies and bubble plans for reception, conference, private offices, and work areas.', [['assets/office/room-studies.webp', 'Room-by-room studies'], ['assets/office/schematic-plan.webp', 'Schematic floor plan']]],
+        ['Space & Furniture Plan', 'Hand-drafted space plan and furniture plan with a lighting legend.', [['assets/office/space-plan.webp', 'Space plan'], ['assets/office/furniture-plan.webp', 'Furniture plan + lighting plan']]],
+        ['Elevation & Section', 'Drafted elevation and section details to finish the drawing set.', [['assets/office/elevation-section.webp', 'Elevation plan and cabinet section']]]
       ],
       gallery: [
-        { src: 'assets/img/office-furniture.webp', caption: 'Furniture plan', contain: true, wide: true },
-        { src: 'assets/img/office-schematic.webp', caption: 'Schematic floor plan', contain: true, wide: true }
+        { src: 'assets/office/furniture-plan.webp', caption: 'Furniture plan + lighting plan', contain: true, wide: true },
+        { src: 'assets/office/space-plan.webp', caption: 'Space plan', contain: true, wide: true }
       ],
       boards: [20]
     }

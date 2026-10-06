@@ -237,7 +237,7 @@ strong { font-weight: 500; }
 .case-hero { margin-top: 0; margin-bottom: clamp(40px, 5vw, 64px); }
 .case-hero figcaption { margin-top: 12px; }
 .case-hero img { width: 100%; max-height: 82vh; object-fit: contain; cursor: zoom-in; }
-.case-hero.is-drawing img, figure.is-drawing img { object-fit: contain; background: #fff; border: 1px solid var(--rule); padding: 3%; }
+.case-hero.is-drawing img, figure.is-drawing img { mix-blend-mode: multiply; }
 .eyebrow { font-family: var(--f-display); font-size: 13px; font-weight: 800; letter-spacing: .2em; margin-bottom: 20px; }
 .case-intro, .case-concept, .case-drivers, .case-process, .case-gallery, .case-boards { margin-bottom: clamp(40px, 5vw, 72px); }
 .case-intro { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 32px; }
