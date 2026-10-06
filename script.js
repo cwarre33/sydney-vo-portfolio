@@ -46,21 +46,25 @@
   }
 
   // ---------- Home: editorial project features ----------
+  // Each feature is a block (image with its text underneath, aligned to the
+  // image's left edge). Blocks alternate width and position for rhythm.
+  // Images keep their natural proportions; nothing is cropped.
   var features = $('#features');
   if (features) {
     var layouts = ['is-wide', 'is-left', 'is-right', 'is-left', 'is-right', 'is-left'];
     features.innerHTML = data.projects.map(function (p, i) {
       var layout = layouts[i % layouts.length];
       return '<article class="feature ' + layout + (p.coverContain ? ' is-drawing' : '') + '">' +
-        '<a class="feature-media img-reveal" href="project.html?p=' + esc(p.slug) + '" data-cursor tabindex="-1" aria-hidden="true">' +
-          '<img src="' + esc(p.cover) + '" alt="" loading="' + (i === 0 ? 'eager' : 'lazy') + '" style="view-transition-name:' + vtName(p.slug) + '" />' +
-        '</a>' +
-        '<div class="feature-text reveal">' +
-          '<span class="feature-num">' + pad(i + 1) + '</span>' +
-          '<p class="feature-kind">' + esc(p.kind) + ' · ' + esc(p.year) + '</p>' +
-          '<h3><a href="project.html?p=' + esc(p.slug) + '">' + esc(p.title) + (p.subtitle ? ' <span lang="ja">' + esc(p.subtitle) + '</span>' : '') + '</a></h3>' +
-          '<p class="feature-summary">' + esc(p.summary) + '</p>' +
-          '<a class="link-arrow" href="project.html?p=' + esc(p.slug) + '" aria-label="View project: ' + esc(p.title) + '">View project <span aria-hidden="true">→</span></a>' +
+        '<div class="feature-block">' +
+          '<a class="feature-media img-reveal" href="project.html?p=' + esc(p.slug) + '" data-cursor tabindex="-1" aria-hidden="true">' +
+            '<img src="' + esc(p.cover) + '" alt="" loading="' + (i === 0 ? 'eager' : 'lazy') + '" style="view-transition-name:' + vtName(p.slug) + '" />' +
+          '</a>' +
+          '<div class="feature-text reveal">' +
+            '<p class="feature-kind"><span>' + pad(i + 1) + '</span>' + esc(p.kind) + ' · ' + esc(p.year) + '</p>' +
+            '<h3><a href="project.html?p=' + esc(p.slug) + '">' + esc(p.title) + (p.subtitle ? ' <span lang="ja">' + esc(p.subtitle) + '</span>' : '') + '</a></h3>' +
+            '<div class="feature-aside"><p class="feature-summary">' + esc(p.summary) + '</p>' +
+            '<a class="link-arrow" href="project.html?p=' + esc(p.slug) + '" aria-label="View project: ' + esc(p.title) + '">View project <span aria-hidden="true">→</span></a></div>' +
+          '</div>' +
         '</div>' +
       '</article>';
     }).join('');
@@ -95,20 +99,25 @@
   // ---------- Home: on the boards ----------
   var otb = $('#otb-grid');
   if (otb) {
-    otb.innerHTML = data.upcoming.map(function (u) {
-      var steps = data.phases.map(function (ph, i) {
+    otb.innerHTML = (data.upcoming || []).map(function (u) {
+      var steps = typeof u.phase === 'number' ? '<ol class="phases" aria-label="Project phase">' + data.phases.map(function (ph, i) {
         var state = i < u.phase ? 'is-done' : i === u.phase ? 'is-current' : '';
         return '<li class="' + state + '"' + (i === u.phase ? ' aria-current="step"' : '') + '><span>' + esc(ph) + '</span></li>';
-      }).join('');
+      }).join('') + '</ol>' : '';
       return '<article class="otb-card reveal">' +
-        '<div class="otb-top"><span class="badge"><i></i>In progress</span><span>' + esc(u.eta) + '</span></div>' +
+        '<div class="otb-top"><span class="badge"><i></i>In progress</span>' + (u.tool ? '<span>' + esc(u.tool) + '</span>' : '') + '</div>' +
         '<h3>' + esc(u.title) + '</h3>' +
         '<p class="otb-org">' + esc(u.org) + '</p>' +
-        '<p class="otb-note">' + esc(u.note) + '</p>' +
-        '<ol class="phases" aria-label="Project phase">' + steps + '</ol>' +
+        (u.note ? '<p class="otb-note">' + esc(u.note) + '</p>' : '') +
+        steps +
       '</article>';
-    }).join('') +
-    '<article class="otb-card otb-more reveal"><p>More work is on the way — check back soon, or <a href="#contact">reach out</a> to see it in progress.</p></article>';
+    }).join('');
+  }
+  var toAdd = $('#otb-list');
+  if (toAdd) {
+    toAdd.innerHTML = (data.toAdd || []).map(function (t) {
+      return '<li class="reveal"><span class="ta-title">' + esc(t.title) + '</span><span class="ta-course">' + esc(t.course) + '</span><span class="ta-term">' + esc(t.term) + '</span></li>';
+    }).join('');
   }
 
   // ---------- Case study ----------
@@ -162,8 +171,18 @@
       '</div>' +
     '</section>';
 
+    function materialsList(mats) {
+      return '<ul class="materials">' + mats.map(function (m) {
+        var sw = m.img ? '<span class="swatch" style="background-image:url(' + esc(m.img) + ')"></span>' : '<span class="swatch" style="background:' + esc(m.color) + '"></span>';
+        return '<li class="reveal">' + sw + '<strong>' + esc(m.name) + '</strong><span>' + esc(m.use) + '</span></li>';
+      }).join('') + '</ul>';
+    }
+    var mats = p.materials || [];
     if (p.concept) {
-      h += '<section class="case-concept wrap reveal"><p class="eyebrow"><span>—</span>Concept</p><blockquote>' + esc(p.concept) + '</blockquote></section>';
+      h += '<section class="case-concept wrap' + (mats.length ? ' has-materials' : '') + '">' +
+        '<div class="reveal"><p class="eyebrow"><span>—</span>Concept</p><blockquote>' + esc(p.concept) + '</blockquote></div>' +
+        (mats.length ? '<div class="concept-materials"><p class="eyebrow"><span>—</span>Finishes &amp; palette</p>' + materialsList(mats) + '</div>' : '') +
+      '</section>';
     }
 
     if (p.drivers && p.drivers.length) {
@@ -184,13 +203,9 @@
         '</article>';
       }).join('') + '</section>';
 
-    // Materials
-    if (p.materials && p.materials.length) {
-      h += '<section class="case-materials wrap"><p class="eyebrow"><span>—</span>Materials &amp; palette</p><ul class="materials">' +
-        p.materials.map(function (m) {
-          var sw = m.img ? '<span class="swatch" style="background-image:url(' + esc(m.img) + ')"></span>' : '<span class="swatch" style="background:' + esc(m.color) + '"></span>';
-          return '<li class="reveal">' + sw + '<strong>' + esc(m.name) + '</strong><span>' + esc(m.use) + '</span></li>';
-        }).join('') + '</ul></section>';
+    // Materials (on their own when there is no concept statement to sit beside)
+    if (mats.length && !p.concept) {
+      h += '<section class="case-materials wrap"><p class="eyebrow"><span>—</span>Finishes &amp; palette</p>' + materialsList(mats) + '</section>';
     }
 
     // Gallery
