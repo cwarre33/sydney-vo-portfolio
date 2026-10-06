@@ -62,23 +62,28 @@
     }).join('');
   }
 
-  // ---------- Home: in-progress ----------
+  // ---------- Home: in the studio ----------
   var studioGrid = document.getElementById('studio-grid');
   if (studioGrid) {
-    studioGrid.innerHTML = data.upcoming.map(function (u) {
-      var steps = data.phases.map(function (ph, i) {
+    studioGrid.innerHTML = (data.upcoming || []).map(function (u) {
+      var steps = typeof u.phase === 'number' ? '<ol class="phases" aria-label="Project phase">' + data.phases.map(function (ph, i) {
         var state = i < u.phase ? 'is-done' : i === u.phase ? 'is-current' : '';
         return '<li class="' + state + '"' + (i === u.phase ? ' aria-current="step"' : '') + '><span>' + esc(ph) + '</span></li>';
-      }).join('');
+      }).join('') + '</ol>' : '';
       return '<article class="studio-card">' +
-        '<div class="studio-top"><span class="badge"><i></i>In progress</span><span class="eta">' + esc(u.eta) + '</span></div>' +
+        '<div class="studio-top"><span class="badge"><i></i>In progress</span>' + (u.tool ? '<span class="eta">' + esc(u.tool) + '</span>' : '') + '</div>' +
         '<h3>' + esc(u.title) + '</h3>' +
         '<p class="studio-org">' + esc(u.org) + '</p>' +
-        '<p class="studio-note">' + esc(u.note) + '</p>' +
-        '<ol class="phases" aria-label="Project phase">' + steps + '</ol>' +
+        (u.note ? '<p class="studio-note">' + esc(u.note) + '</p>' : '') +
+        steps +
       '</article>';
-    }).join('') +
-    '<article class="studio-card studio-more"><p>More work is on the way — check back soon, or <a href="#contact">reach out</a> to see it in progress.</p></article>';
+    }).join('');
+  }
+  var studioList = document.getElementById('studio-list');
+  if (studioList) {
+    studioList.innerHTML = (data.toAdd || []).map(function (t) {
+      return '<li><span class="ta-title">' + esc(t.title) + '</span><span class="ta-course">' + esc(t.course) + '</span><span class="ta-term">' + esc(t.term) + '</span></li>';
+    }).join('');
   }
 
   // ---------- Case study page ----------
@@ -120,8 +125,18 @@
         '</div>' +
       '</section>';
 
+    // Concept sits beside the finishes palette so the section is filled out.
+    var mats = p.materials || [];
+    var matsHtml = mats.length ? '<ul class="materials">' + mats.map(function (m) {
+      var sw = m.img ? '<span class="swatch" style="background-image:url(' + esc(m.img) + ')"></span>' : '<span class="swatch" style="background:' + esc(m.color) + '"></span>';
+      return '<li>' + sw + '<strong>' + esc(m.name) + '</strong><span>' + esc(m.use) + '</span></li>';
+    }).join('') + '</ul>' : '';
     if (p.concept) {
-      html += '<section class="case-concept wrap"><h2 class="eyebrow">Concept</h2><blockquote>' + esc(p.concept) + '</blockquote></section>';
+      html += '<section class="case-concept wrap' + (mats.length ? ' has-materials' : '') + '">' +
+        '<div><h2 class="eyebrow">Concept</h2><blockquote>' + esc(p.concept) + '</blockquote></div>' +
+        (mats.length ? '<div><h2 class="eyebrow">Finishes</h2>' + matsHtml + '</div>' : '') + '</section>';
+    } else if (mats.length) {
+      html += '<section class="case-concept wrap"><h2 class="eyebrow">Finishes</h2>' + matsHtml + '</section>';
     }
 
     if (p.drivers && p.drivers.length) {

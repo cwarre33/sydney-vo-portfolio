@@ -26,7 +26,7 @@ window.PORTFOLIO = {
         ['Size', '5,000 sq ft'],
         ['Site', '2508½ Hillsborough St, Raleigh, NC']
       ],
-      cover: 'assets/img/kenko-reception.webp',
+      cover: 'assets/kenko/reception-1.webp',
       coverAlt: 'Kenko reception with a curved wood-slat desk, a guest in a wheelchair at the lowered counter',
       summary: 'A biophilic wellness center on Raleigh’s Hillsborough Street, inspired by the traditional Japanese teahouse.',
       description: [
@@ -41,16 +41,30 @@ window.PORTFOLIO = {
         ['Biophilic integration', 'Natural woods and greenery strengthen well-being and connection to nature.']
       ],
       process: [
-        ['Programming', 'Explored multiple block-diagram iterations to refine functional zoning, room adjacencies, and circulation.', [['assets/process/kenko-program.webp', 'Site location, original floor plan, and block-diagram iterations']]],
-        ['Schematic Design', 'The footprint splits active and quiet zones: reception, retail, and tea bar face Hillsborough Street, while studios and amenities transition toward the quiet rear alley. Sections keep the original 14′-0″ floor-to-deck clearance, with dropped ceilings in select zones for human scale and acoustic comfort.', [['assets/process/kenko-plans.webp', 'New floor plan and rendered floor plan'], ['assets/process/kenko-sections.webp', 'Front and back sections']]],
-        ['Design Development', 'Custom millwork for the reception desk and tea bar counter uses dual counter heights, durable surfaces, and integrated storage to meet ADA standards without sacrificing style. A lighting plan sets the overall intent and ambiance.', [['assets/process/kenko-millwork-desk.webp', 'Custom millwork — reception desk'], ['assets/process/kenko-millwork-teabar.webp', 'Custom millwork — tea bar counter'], ['assets/process/kenko-lighting.webp', 'Lighting plan']]]
+        ['Programming', 'Studied the site on Raleigh’s high-density Hillsborough Street corridor and documented the existing floor plan. The 5,000 sq ft excludes the existing stair and elevator shaft.', [['assets/kenko/site-location.webp', 'Site location — 2508½ Hillsborough St, Raleigh'], ['assets/kenko/original-floorplan.webp', 'Original floor plan']]],
+        ['Schematic Design', 'Block-diagram iterations refined functional zoning, room adjacencies, and circulation. The final footprint splits active and quiet zones: reception, retail, and tea bar face Hillsborough Street, while studios and amenities transition toward the quiet rear alley. Sections keep the original 14′-0″ floor-to-deck clearance, with dropped ceilings in select zones for human scale and acoustic comfort.', [['assets/kenko/block-diagram-1.webp', 'Block diagram — first iteration'], ['assets/kenko/block-diagram-2.webp', 'Block diagram — refined iteration'], ['assets/kenko/new-floorplan.webp', 'New floor plan (excluding elevator shaft & stairs)'], ['assets/kenko/rendered-floorplan.webp', 'Rendered floor plan'], ['assets/kenko/section-front.webp', 'Front section'], ['assets/kenko/section-back.webp', 'Back section']]],
+        ['Design Development', 'Custom millwork for the reception desk and tea bar counter uses dual counter heights, durable surfaces, and integrated storage to meet ADA standards without sacrificing style. A lighting plan sets the overall intent and ambiance.', [['assets/kenko/millwork-reception.webp', 'Custom reception desk — front & back'], ['assets/kenko/teabar-sketches.webp', 'Tea bar — millwork sketches'], ['assets/kenko/millwork-teabar.webp', 'Custom tea bar counter — front & back'], ['assets/process/kenko-lighting.webp', 'Lighting plan']]]
+      ],
+      materials: [
+        { name: 'Walnut', use: 'Reception desk slats', img: 'assets/materials/walnut.webp' },
+        { name: 'Ashbee Oak', use: 'Tea bar casework', img: 'assets/materials/ashbee-oak.webp' },
+        { name: 'Kabina Apple Green', use: 'Tea bar tile', img: 'assets/materials/kabina-apple-green.webp' },
+        { name: 'Corian Stonique', use: 'Counter surfaces', img: 'assets/materials/corian-stonique.webp' }
       ],
       gallery: [
-        { src: 'assets/img/kenko-teabar.webp', caption: 'Tea bar — platform seating view. Warm wood, green tile accents, and soft pendant light create a place to gather and relax.', wide: true },
-        { src: 'assets/img/kenko-teabar-2.webp', caption: 'Tea bar' },
-        { src: 'assets/img/kenko-teabar-3.webp', caption: 'Tea bar seating' },
-        { src: 'assets/img/kenko-reception.webp', caption: 'Reception — a curved desk with vertical wood slats and dual-height counters for full ADA accessibility.', wide: true },
-        { src: 'assets/img/kenko-bath.webp', caption: 'Restroom — fluted wall tile, rich earth tones, and vessel-sink vanities under soft, indirect light.', wide: true }
+        { src: 'assets/kenko/teabar-platform.webp', caption: 'Tea bar — platform seating view. Inspired by traditional Japanese teahouses, warm wood, green tile accents, and soft pendant light create a place to gather and relax.', wide: true },
+        { src: 'assets/kenko/teabar-1.webp', caption: 'Tea bar' },
+        { src: 'assets/kenko/teabar-2.webp', caption: 'Tea bar seating' },
+        { src: 'assets/kenko/reception-1.webp', caption: 'Reception — a curved desk with vertical wood slats and soft under-counter lighting. Dual-height counters ensure full ADA accessibility.', wide: true },
+        { src: 'assets/kenko/reception-2.webp', caption: 'Reception — approach from the entry', wide: true },
+        { src: 'assets/kenko/retail.webp', caption: 'Retail display', wide: true },
+        { src: 'assets/kenko/retail-2.webp', caption: 'Retail' },
+        { src: 'assets/kenko/fitting-room.webp', caption: 'Fitting rooms' },
+        { src: 'assets/kenko/pilates-1.webp', caption: 'Private pilates studio', wide: true },
+        { src: 'assets/kenko/pilates-2.webp', caption: 'Pilates studio — reformer layout', wide: true },
+        { src: 'assets/kenko/locker-1.webp', caption: 'Locker room' },
+        { src: 'assets/kenko/locker-2.webp', caption: 'Locker room — bench and storage' },
+        { src: 'assets/kenko/restroom.webp', caption: 'Restroom — fluted wall tile, rich earth tones, and vessel-sink vanities under soft, indirect light.', wide: true }
       ],
       boards: [5, 6, 7, 8, 9, 10]
     },
@@ -62,7 +76,7 @@ window.PORTFOLIO = {
       year: 'Fall 2025',
       software: ['Revit', 'Enscape', 'Canva'],
       facts: [['Team', 'with Hailey Martin'], ['My role', 'Layout design & 3D development']],
-      cover: 'assets/img/cadlab-presentation.webp',
+      cover: 'assets/cadlab/presentation-zone.webp',
       coverAlt: 'Redesigned CAD lab with rows of desks facing a raspberry accent wall and projection screen',
       summary: 'Turning an outdated computer lab into a flexible, collaborative studio for Meredith Makeover.',
       description: [
@@ -75,14 +89,14 @@ window.PORTFOLIO = {
         ['Acoustics & ESD safety', 'Static-control SDT tile flooring and acoustic ceiling panels protect hardware and balance room sound.']
       ],
       process: [
-        ['Programming', 'Documented the existing floor plan and how students actually used the room.', [['assets/process/cad-existing.webp', 'Existing floor plan']]],
-        ['Schematic Design', 'A proposed floor plan with east and west elevations organizing desks into collaborative pods.', [['assets/process/cad-schematic.webp', 'Proposed floor plan with east and west elevations']]],
-        ['Design Development', 'A palette of accent wall paint, floor tile, and a raspberry furniture color, with professor, student, and overflow desks, swivel chairs, CPU towers, and mounted screens.', [['assets/process/cad-dd.webp', 'Color palette and furniture selections']]]
+        ['Programming', 'Documented the existing floor plan and how students actually used the room.', [['assets/cadlab/existing-floorplan.webp', 'Existing floor plan']]],
+        ['Schematic Design', 'A proposed floor plan with east and west elevations organizing desks into collaborative pods.', [['assets/cadlab/proposed-floorplan.webp', 'Proposed floor plan'], ['assets/cadlab/east-elevation.webp', 'East elevation'], ['assets/cadlab/west-elevation.webp', 'West elevation']]],
+        ['Design Development', 'A palette of accent wall paint, floor tile, and a raspberry furniture color, with professor, student, and overflow desks, swivel chairs, CPU towers, and mounted screens.', [['assets/cadlab/palette.webp', 'Color palette'], ['assets/cadlab/furniture.webp', 'Furniture selections']]]
       ],
       gallery: [
-        { src: 'assets/img/cadlab-presentation.webp', caption: 'Instructor & presentation zone — a focal wall with integrated AV projection, brand-aligned accent finishes, and clear sightlines from every workstation.', wide: true },
-        { src: 'assets/img/cadlab-pods.webp', caption: 'Collaborative workstation pods — 4-student clusters aligned with natural light and wall-integrated power.' },
-        { src: 'assets/img/cadlab-overflow.webp', caption: 'Overflow lab — an adjoining room with flexible seating for focused work and extra capacity.' }
+        { src: 'assets/cadlab/presentation-zone.webp', caption: 'Instructor & presentation zone — a focal wall with integrated AV projection, brand-aligned accent finishes, and clear sightlines from every workstation.', wide: true },
+        { src: 'assets/cadlab/workstation-pods.webp', caption: 'Collaborative workstation pods — 4-student clusters aligned with natural light and wall-integrated power.' },
+        { src: 'assets/cadlab/overflow-lab.webp', caption: 'Overflow lab — an adjoining room with flexible seating for focused work and extra capacity.' }
       ],
       link: { href: 'https://www.canva.com/design/DAG3wN_GKiw/ILC7aJ-KUs14w9XyVq1EaQ/view', label: 'View the full presentation' },
       boards: [11, 12]
@@ -173,7 +187,7 @@ window.PORTFOLIO = {
       year: 'Fall 2023',
       software: ['Hand drafting'],
       facts: [],
-      cover: 'assets/img/office-furniture.webp',
+      cover: 'assets/office/furniture-plan.webp',
       coverAlt: 'Hand-drafted furniture plan of a design office',
       coverContain: true,
       summary: 'Where it started — a fully hand-drafted office plan built on space-planning fundamentals.',
@@ -182,28 +196,38 @@ window.PORTFOLIO = {
         'The layout emphasizes clear spatial organization, efficient circulation, and ADA-compliant accessibility to create a functional, well-proportioned workspace.'
       ],
       process: [
-        ['Schematic Design', 'Room-by-room studies and bubble plans for reception, conference, private offices, and work areas.', [['assets/process/office-schematic.webp', 'Room studies and schematic plan']]],
-        ['Space & Furniture Plan', 'Hand-drafted space plan and furniture plan with a lighting legend.', [['assets/process/office-space.webp', 'Space plan'], ['assets/process/office-furniture-plan.webp', 'Furniture plan']]],
-        ['Elevation & Section', 'Drafted elevation and section details to finish the drawing set.', [['assets/process/office-elevation.webp', 'Elevation and section']]]
+        ['Schematic Design', 'Room-by-room studies and bubble plans for reception, conference, private offices, and work areas.', [['assets/office/room-studies.webp', 'Room-by-room studies'], ['assets/office/schematic-plan.webp', 'Schematic floor plan']]],
+        ['Space & Furniture Plan', 'Hand-drafted space plan and furniture plan with a lighting legend.', [['assets/office/space-plan.webp', 'Space plan'], ['assets/office/furniture-plan.webp', 'Furniture plan + lighting plan']]],
+        ['Elevation & Section', 'Drafted elevation and section details to finish the drawing set.', [['assets/office/elevation-section.webp', 'Elevation plan and cabinet section']]]
       ],
       gallery: [
-        { src: 'assets/img/office-furniture.webp', caption: 'Furniture plan', contain: true, wide: true },
-        { src: 'assets/img/office-schematic.webp', caption: 'Schematic floor plan', contain: true, wide: true }
+        { src: 'assets/office/furniture-plan.webp', caption: 'Furniture plan + lighting plan', contain: true, wide: true },
+        { src: 'assets/office/space-plan.webp', caption: 'Space plan', contain: true, wide: true }
       ],
       boards: [20]
     }
   ],
 
-  // ----- In progress -------------------------------------------------------
-  // `phase` is the index into `phases` above that the project is currently in
-  // (0 = Programming … 3 = Rendering). `eta` is free text.
+  // ----- In the studio --------------------------------------------------------
+  // `upcoming`: personal projects still in the works. `phase` is optional:
+  // an index into `phases` (0 = Programming … 3 = Rendering) shows a tracker.
   upcoming: [
-    {
-      title: 'Senior Studio Project',
-      org: 'Meredith College · Senior year',
-      eta: 'Spring 2027',
-      phase: 0,
-      note: 'Currently in programming. Research, site analysis, and first block diagrams are underway.'
-    }
+    { title: 'Law Firm', org: 'Personal project', tool: 'Revit' },
+    { title: 'Coastal Home', org: 'Personal project', tool: 'SketchUp' },
+    { title: 'Tea Bar Extension', org: 'Personal project · Potential', tool: 'Revit' }
+  ],
+
+  // `toAdd`: finished projects whose case studies are still being written.
+  // When one is ready, give it a full entry in `projects` and remove it here.
+  toAdd: [
+    { title: 'Duplex Plan', course: 'ID 244 · Interior Design II', term: 'Spring 2024' },
+    { title: 'Bedroom Redesign', course: 'ID 243 · Process and Presentation', term: 'Fall 2024' },
+    { title: 'Hotel Suite', course: 'ID 248 · Technology Applications I', term: 'Spring 2025' },
+    { title: 'Lighting — Residential', course: 'ID 348 · Interior Lighting Design', term: 'Spring 2026' },
+    { title: 'Lighting — Commercial', course: 'ID 348 · Interior Lighting Design', term: 'Spring 2026' },
+    { title: 'Office Redesign', course: 'ID 447 · Interior Design IV: Commercial II', term: 'Fall 2026' },
+    { title: 'Ledford Field Verification', course: 'ID 447 · Interior Design IV: Commercial II', term: 'Fall 2026' },
+    { title: 'Kitchen Elevations', course: 'ID 447 · Interior Design IV: Commercial II', term: 'Fall 2026' },
+    { title: 'Staging', course: 'Furnitureland South', term: 'Potential' }
   ]
 };
