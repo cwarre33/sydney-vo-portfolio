@@ -23,7 +23,8 @@
 
   --gutter: clamp(16px, 4vw, 48px);
   --max: 1240px;
-  --header-h: 68px;
+  --bar-h: 32px;
+  --header-h: calc(68px + var(--bar-h));
   --ease: cubic-bezier(.2, .7, .2, 1);
 }
 
@@ -87,7 +88,16 @@ strong { font-weight: 500; }
   border-bottom: 1px solid transparent; transition: border-color .3s, box-shadow .3s;
 }
 .site-header.is-scrolled { border-bottom-color: var(--rule); box-shadow: 0 6px 18px rgba(21,20,19,.06); }
-.header-inner { max-width: var(--max); margin: 0 auto; height: 100%; padding: 0 var(--gutter); display: flex; align-items: center; justify-content: space-between; }
+/* Work-in-progress ticker at the very top of the header */
+.wip-bar { height: var(--bar-h); overflow: hidden; background: var(--ink); color: #EDE7DE; display: flex; align-items: center; font-family: var(--f-display); font-size: 11px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; }
+.wip-track { display: flex; width: max-content; animation: wip-scroll 38s linear infinite; }
+.wip-bar:hover .wip-track { animation-play-state: paused; }
+.wip-group { display: flex; flex-shrink: 0; }
+.wip-group > span { display: inline-flex; align-items: center; gap: 10px; padding: 0 28px; white-space: nowrap; }
+.wip-group > span + span::before { content: ''; width: 4px; height: 4px; border-radius: 50%; background: #8F877C; margin-right: 18px; margin-left: -28px; }
+.wip-group i { width: 7px; height: 7px; border-radius: 50%; background: #D98A95; animation: pulse 2.2s infinite; }
+@keyframes wip-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.header-inner { max-width: var(--max); margin: 0 auto; height: calc(100% - var(--bar-h)); padding: 0 var(--gutter); display: flex; align-items: center; justify-content: space-between; }
 .logo { display: inline-flex; align-items: center; gap: 6px; text-decoration: none; font-family: var(--f-serif); font-size: 26px; line-height: 1; }
 .logo i { width: 1px; height: 30px; background: var(--ink); }
 .nav ul { display: flex; gap: 32px; list-style: none; margin: 0; padding: 0; }
@@ -255,10 +265,17 @@ strong { font-weight: 500; }
 .case-process ol > li::before { content: counter(step, decimal-leading-zero); font-family: var(--f-display); font-weight: 900; font-size: 28px; line-height: 1; }
 .case-process h3 { font-size: 17px; letter-spacing: .04em; }
 .case-process p { margin: 0; color: var(--ink-2); }
-.step-media { grid-column: 2 / -1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 32px; margin-top: 16px; align-items: start; max-width: 900px; }
+.step-media { grid-column: 2 / -1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 32px; margin-top: 16px; align-items: end; max-width: 900px; }
 .step-media figure { margin: 0; }
 .step-media figure.is-wide { grid-column: 1 / -1; }
-.step-row { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 150px; gap: 24px 28px; align-items: start; }
+.step-media figure.is-wide img { margin: 0 auto; }
+.step-media figure.is-tall { grid-column: 1 / -1; text-align: center; }
+.step-media figure.is-tall img { width: auto; max-width: 100%; max-height: 62vh; margin: 0 auto; }
+/* centred drawings: the caption takes the image's width so it sits right under it */
+.step-media figure.is-wide, .step-media figure.is-tall { display: table; margin: 0 auto; text-align: left; }
+.step-media figure.is-wide figcaption, .step-media figure.is-tall figcaption { display: table-caption; caption-side: bottom; }
+.step-row { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 150px; gap: 24px 28px; align-items: end; }
+.step-row .step-finishes { align-self: start; }
 .step-row figure { margin: 0; }
 .step-finishes h4 { margin: 0 0 12px; font-family: var(--f-display); font-size: 12px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
 .case-process .step-finishes ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 12px; }
@@ -345,6 +362,7 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
   .lb-prev, .lb-next { top: auto; bottom: 4px; transform: none; }
 }
 @media (prefers-reduced-motion: reduce) {
+  .wip-track { animation: none !important; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; animation: none !important; }
 }

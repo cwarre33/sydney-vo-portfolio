@@ -60,7 +60,8 @@ window.PORTFOLIO = {
         { src: 'assets/kenko/reception-2.webp', caption: 'Reception — approach from the entry', wide: true },
         { src: 'assets/kenko/retail.webp', caption: 'Retail display', wide: true },
         { src: 'assets/kenko/retail-2.webp', caption: 'Retail' },
-        { src: 'assets/kenko/fitting-room.webp', caption: 'Fitting rooms' },
+        { src: 'assets/kenko/retail-3.webp', caption: 'Retail — checkout counter' },
+        { src: 'assets/kenko/fitting-room.webp', caption: 'Fitting rooms', wide: true },
         { src: 'assets/kenko/pilates-1.webp', caption: 'Private pilates studio', wide: true },
         { src: 'assets/kenko/pilates-2.webp', caption: 'Pilates studio — reformer layout', wide: true },
         { src: 'assets/kenko/locker-1.webp', caption: 'Locker room' },
@@ -90,8 +91,8 @@ window.PORTFOLIO = {
         ['Acoustics & ESD safety', 'Static-control SDT tile flooring and acoustic ceiling panels protect hardware and balance room sound.']
       ],
       process: [
-        ['Programming', 'Documented the existing floor plan and how students actually used the room.', [['assets/cadlab/existing-floorplan.webp', 'Existing floor plan']]],
-        ['Schematic Design', 'A proposed floor plan with east and west elevations organizing desks into collaborative pods.', [['assets/cadlab/proposed-floorplan.webp', 'Proposed floor plan'], ['assets/cadlab/east-elevation.webp', 'East elevation'], ['assets/cadlab/west-elevation.webp', 'West elevation']]],
+        ['Programming', 'Documented the existing floor plan and how students actually used the room.', [['assets/cadlab/existing-floorplan.webp', 'Original floor plan']]],
+        ['Schematic Design', 'A proposed floor plan with north, south, east, and west elevations organizing desks into collaborative pods.', [['assets/cadlab/proposed-floorplan.webp', 'Proposed floor plan'], ['assets/cadlab/north-elevation.webp', 'North elevation'], ['assets/cadlab/south-elevation.webp', 'South elevation'], ['assets/cadlab/east-elevation.webp', 'East elevation'], ['assets/cadlab/west-elevation.webp', 'West elevation']]],
         ['Design Development', 'A palette of accent wall paint, floor tile, and a raspberry furniture color, with professor, student, and overflow desks, swivel chairs, CPU towers, and mounted screens.', [['assets/cadlab/palette.webp', 'Color palette'], ['assets/cadlab/furniture.webp', 'Furniture selections']]]
       ],
       gallery: [
@@ -118,9 +119,9 @@ window.PORTFOLIO = {
         'An on-site spatial analysis evaluated scale, viewing angles, and architectural context, translating brand values into large-scale environmental graphics through hand sketching and 3D visualization.'
       ],
       process: [
-        ['Schematic Design', 'Conceptual hand sketches explored composition, scale, and brand-aligned graphic forms to test visual rhythm across the façade.', [['assets/process/mural-sketches.webp', 'Conceptual hand sketches']]],
-        ['Design Development', 'Schematic concepts moved into SketchUp to check true scale, proportion, and impact on the building envelope.', [['assets/process/mural-models.webp', 'SketchUp studies on the façade']]],
-        ['Implementation', 'The final mural was installed on the building in Summer 2026 — the concept brought to life at full architectural scale.', [['assets/img/mural-install.webp', 'Installed on the warehouse façade']]]
+        ['Schematic Design', 'Conceptual hand sketches explored composition, scale, and brand-aligned graphic forms to test visual rhythm across the façade.', [['assets/mural/sketches-1.webp', 'Conceptual hand sketches'], ['assets/mural/sketches-2.webp', 'Conceptual hand sketches']]],
+        ['Design Development', 'Schematic concepts moved into SketchUp to check true scale, proportion, and impact on the building envelope.', [['assets/mural/design-development.webp', 'Option 1: single “A” mural · Option 2: single “A” mural with black outline']]],
+        ['Implementation', 'The final mural was installed on the building in Summer 2026 — the concept brought to life at full architectural scale.', [['assets/mural/implementation.webp', 'Installed on the warehouse façade']]]
       ],
       gallery: [
         { src: 'assets/img/mural-install.webp', caption: 'Final installation on the warehouse façade.', tall: true }
