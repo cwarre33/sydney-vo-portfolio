@@ -118,9 +118,9 @@ window.PORTFOLIO = {
         'An on-site spatial analysis evaluated scale, viewing angles, and architectural context, translating brand values into large-scale environmental graphics through hand sketching and 3D visualization.'
       ],
       process: [
-        ['Schematic Design', 'Conceptual hand sketches explored composition, scale, and brand-aligned graphic forms to test visual rhythm across the façade.', [['assets/process/mural-sketches.webp', 'Conceptual hand sketches']]],
-        ['Design Development', 'Schematic concepts moved into SketchUp to check true scale, proportion, and impact on the building envelope.', [['assets/process/mural-models.webp', 'SketchUp studies on the façade']]],
-        ['Implementation', 'The final mural was installed on the building in Summer 2026 — the concept brought to life at full architectural scale.', [['assets/img/mural-install.webp', 'Installed on the warehouse façade']]]
+        ['Schematic Design', 'Conceptual hand sketches explored composition, scale, and brand-aligned graphic forms to test visual rhythm across the façade.', [['assets/mural/sketches-1.webp', 'Conceptual hand sketches'], ['assets/mural/sketches-2.webp', 'Conceptual hand sketches']]],
+        ['Design Development', 'Schematic concepts moved into SketchUp to check true scale, proportion, and impact on the building envelope.', [['assets/mural/design-development.webp', 'Option 1: single “A” mural · Option 2: single “A” mural with black outline']]],
+        ['Implementation', 'The final mural was installed on the building in Summer 2026 — the concept brought to life at full architectural scale.', [['assets/mural/implementation.webp', 'Installed on the warehouse façade']]]
       ],
       gallery: [
         { src: 'assets/img/mural-install.webp', caption: 'Final installation on the warehouse façade.', tall: true }

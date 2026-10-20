@@ -183,7 +183,14 @@
 
     caseEl.innerHTML = html;
     caseEl.querySelectorAll('.step-media img').forEach(function (img) {
-      function mark() { if (img.naturalWidth / img.naturalHeight > 1.9) img.closest('figure').classList.add('is-wide'); }
+      function mark() {
+        var fig = img.closest('figure'), r = img.naturalWidth / img.naturalHeight;
+        if (img.closest('.step-row')) return;
+        if (r > 1.9) fig.classList.add('is-wide');
+        else if (r < 0.85) fig.classList.add('is-tall');
+        // don't blow small drawings up past ~1.6x their real size
+        img.style.maxWidth = Math.round(img.naturalWidth * 1.6) + 'px';
+      }
       if (img.complete) mark(); else img.addEventListener('load', mark);
     });
     initLightbox();
