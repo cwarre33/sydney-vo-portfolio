@@ -60,7 +60,8 @@ window.PORTFOLIO = {
         { src: 'assets/kenko/reception-2.webp', caption: 'Reception — approach from the entry', wide: true },
         { src: 'assets/kenko/retail.webp', caption: 'Retail display', wide: true },
         { src: 'assets/kenko/retail-2.webp', caption: 'Retail' },
-        { src: 'assets/kenko/fitting-room.webp', caption: 'Fitting rooms' },
+        { src: 'assets/kenko/retail-3.webp', caption: 'Retail — checkout counter' },
+        { src: 'assets/kenko/fitting-room.webp', caption: 'Fitting rooms', wide: true },
         { src: 'assets/kenko/pilates-1.webp', caption: 'Private pilates studio', wide: true },
         { src: 'assets/kenko/pilates-2.webp', caption: 'Pilates studio — reformer layout', wide: true },
         { src: 'assets/kenko/locker-1.webp', caption: 'Locker room' },
@@ -90,8 +91,8 @@ window.PORTFOLIO = {
         ['Acoustics & ESD safety', 'Static-control SDT tile flooring and acoustic ceiling panels protect hardware and balance room sound.']
       ],
       process: [
-        ['Programming', 'Documented the existing floor plan and how students actually used the room.', [['assets/cadlab/existing-floorplan.webp', 'Existing floor plan']]],
-        ['Schematic Design', 'A proposed floor plan with east and west elevations organizing desks into collaborative pods.', [['assets/cadlab/proposed-floorplan.webp', 'Proposed floor plan'], ['assets/cadlab/east-elevation.webp', 'East elevation'], ['assets/cadlab/west-elevation.webp', 'West elevation']]],
+        ['Programming', 'Documented the existing floor plan and how students actually used the room.', [['assets/cadlab/existing-floorplan.webp', 'Original floor plan']]],
+        ['Schematic Design', 'A proposed floor plan with north, south, east, and west elevations organizing desks into collaborative pods.', [['assets/cadlab/proposed-floorplan.webp', 'Proposed floor plan'], ['assets/cadlab/north-elevation.webp', 'North elevation'], ['assets/cadlab/south-elevation.webp', 'South elevation'], ['assets/cadlab/east-elevation.webp', 'East elevation'], ['assets/cadlab/west-elevation.webp', 'West elevation']]],
         ['Design Development', 'A palette of accent wall paint, floor tile, and a raspberry furniture color, with professor, student, and overflow desks, swivel chairs, CPU towers, and mounted screens.', [['assets/cadlab/palette.webp', 'Color palette'], ['assets/cadlab/furniture.webp', 'Furniture selections']]]
       ],
       gallery: [
